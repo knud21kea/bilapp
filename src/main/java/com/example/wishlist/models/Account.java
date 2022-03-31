@@ -2,24 +2,23 @@ package com.example.wishlist.models;
 
 public class Account {
 
-    private String userName;
+    private String accountName;
     private String password;
     private String email;
     private boolean hasAccount;
 
-    public Account(String userName, String password, String email, boolean hasAccount) {
-        this.userName = userName;
+    public Account(String userName, String password, String email) {
+        this.accountName = userName;
         this.password = password;
         this.email = email;
-        this.hasAccount = hasAccount;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getAccountName() {
+        return accountName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
     public String getPassword() {
@@ -49,7 +48,7 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-               "userName='" + userName + '\'' +
+               "userName='" + accountName + '\'' +
                ", password='" + password + '\'' +
                ", email='" + email + '\'' +
                ", hasAccount=" + hasAccount +

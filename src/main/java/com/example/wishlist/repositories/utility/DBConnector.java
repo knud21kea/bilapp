@@ -1,5 +1,9 @@
 package com.example.wishlist.repositories.utility;
 
+import com.example.wishlist.models.Account;
+import com.example.wishlist.models.WishList;
+import com.example.wishlist.repositories.DBHandler;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -19,7 +23,14 @@ public class DBConnector {
     }
 
     public static void main(String[] args) {
-        connectDB();
+
+        DBHandler dbHandler = new DBHandler();
+
+        Account account = new Account("Torben", "kodeord", "email@torben.com");
+        dbHandler.insertAccountToDB(account);
+
+        // WishList wishList = new WishList("FørsteWishList");
+        // dbHandler.insertWishListToDB(wishList);
     }
 }
 
