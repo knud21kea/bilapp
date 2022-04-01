@@ -55,8 +55,7 @@ public class DBHandler {
             preparedStatement.setString(2,email);
             preparedStatement.setString(3,password);
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {;
         }
     }
 }
