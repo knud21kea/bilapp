@@ -15,24 +15,34 @@ public class AccountController
     // simulates the db
     private ArrayList<String> userNames = new ArrayList<>(Arrays.asList("", "a", "ab", "abc"));
 
-    @GetMapping("/account")
+    @GetMapping("/signup")
     public String start(Model model)
     {
         model.addAttribute("userNames", userNames);
-        return "account";
+        return "signup";
     }
 
-    @PostMapping("/account")
+    @PostMapping("/signup")
     public String createLogin(WebRequest account, Model model)
     {
         String user = account.getParameter("userName");
         userNames.add(user);
         model.addAttribute("userNames", userNames);
-        return "redirect:/login";
+        return "redirect:/index";
     }
 
     @GetMapping("/login")
     public String accountCreated() {
         return "/login";
+    }
+
+    @PostMapping("/login")
+    public String submitLogin(WebRequest account, Model model)
+    {
+        //todo: add username and password to session
+        String user = account.getParameter("userName");
+        String pass = account.getParameter("password");
+
+        return "redirect:/index";
     }
 }
