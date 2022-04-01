@@ -5,7 +5,6 @@ public class Account {
     private String accountName;
     private String password;
     private String email;
-    private boolean hasAccount;
 
     public Account(String userName, String password, String email) {
         this.accountName = userName;
@@ -37,21 +36,12 @@ public class Account {
         this.email = email;
     }
 
-    public boolean isHasAccount() {
-        return hasAccount;
-    }
-
-    public void setHasAccount(boolean hasAccount) {
-        this.hasAccount = hasAccount;
-    }
-
     @Override
     public String toString() {
         return "Account{" +
                "userName='" + accountName + '\'' +
                ", password='" + password + '\'' +
                ", email='" + email + '\'' +
-               ", hasAccount=" + hasAccount +
                '}';
     }
 }
