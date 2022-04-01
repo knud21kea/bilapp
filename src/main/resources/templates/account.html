@@ -1,10 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Account</title>
+    <style>
+        input {
+            width: 15%;
+        }
+
+        button.visible {
+            display: inline-block;
+            cursor: pointer;
+            width: 16%;
+        }
+
+        button.hidden {
+            display: none;
+            width: 16%;
+        }
+
+    </style>
 </head>
 <body>
+<h1>Account creation form</h1>
+<form name="form" action="/account" method="POST">
 
+    <label for="userName">Username</label><br>
+    <input type="text" id="userName" name="userName" autocomplete="off" onkeyup="echoName(this.value);"/>
+    <span id="free">:Username is not available</span><br><br>
+
+    <label for="password">Password<br>(minimum 4 characters)</label><br>
+    <input type="password" id="password" name="password" autocomplete="off" onkeyup="echoPass(this.value);"/>
+    <span id="length">: Password is too short</span><br><br>
+
+    <label for="password2">Retype Password</label><br>
+    <input type="password" id="password2" name="password2" autocomplete="off" onkeyup="passCheck();"/>
+    <span id="check"></span><br><br><br>
+
+    <button id="resetButton" class="visible" type="button" onclick="resetForm()">Reset form</button>
+    <button id="submitButton" class="hidden" type="submit" onclick="location.href='../login'">Create account</button>
+
+</form>
+<script th:inline="javascript">
+    let uname = false;
+    let upass = false;
+    let check = false;
+
+    function echoName(value) {
+        let names = [[${userNames}]];
+        if (names.includes(value)) {
+            document.getElementById("free").innerHTML = ":Username is not available";
+            uname = false;
+        } else {
+            document.getElementById("free").innerHTML = ":Username is available";
+            uname = true;
+        }
+        showSubmit();
+    }
+
+    function echoPass(value) {
+        if (value.length < 4) {
+            document.getElementById("length").innerHTML = ": Password is too short";
+            upass = false;
+        } else {
+            document.getElementById("length").innerHTML = ":Password is ok";
+            upass = true;
+        }
+        passCheck();
+        showSubmit();
+    }
+
+    function passCheck() {
+        if (document.form.password.value === document.form.password2.value) {
+            document.getElementById("check").innerHTML = ": OK";
+            check = true;
+        } else {
+            document.getElementById("check").innerHTML = ": Passwords don't match";
+            check = false;
+        }
+        showSubmit();
+    }
+
+    function showSubmit() {
+        if (uname && upass && check) {
+            document.getElementById("submitButton").className = "visible";
+        } else {
+            document.getElementById("submitButton").className = "hidden";
+        }
+    }
+
+    function resetForm() {
+        document.form.userName.value = "";
+        echoName("");
+        document.form.password.value = "";
+        echoPass("");
+        document.form.password2.value = "";
+        passCheck("");
+        showSubmit();
+    }
+</script>
 </body>
 </html>
