@@ -1,6 +1,7 @@
 package com.example.wishlist.repositories;
 
 import com.example.wishlist.models.Account;
+import com.example.wishlist.models.Wish;
 import com.example.wishlist.models.WishList;
 import com.example.wishlist.repositories.utility.DBConnector;
 
@@ -8,9 +9,6 @@ import java.sql.PreparedStatement;
 
 public class DBHandler {
 
-    public void insertWishToDB(){
-
-    }
     //TODO Virker ikke før vi kan hente Account_ID.
     public void insertWishListToDB(WishList wishList) {
         String wishListName = wishList.getWishListName();
@@ -20,6 +18,24 @@ public class DBHandler {
             preparedStatement.setString(1, wishListName);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //TODO Virker ikke før vi kan hente wishlist_ID
+    public void insertWishToDB(Wish wish) {
+        String wishName = wish.getName();
+        String wishDescription = wish.getDescription();
+        String wishURL = wish.getURL();
+        double wishPrice = wish.getPrice();
+        try {
+            PreparedStatement preparedStatement = DBConnector.connectDB().prepareStatement("INSERT INTO wish (`wish_name`, `wish_description`, `wish_price`, `wish_url`)");
+
+            preparedStatement.setString(1,wishName);
+            preparedStatement.setString(2,wishDescription);
+            preparedStatement.setDouble(3,wishPrice);
+            preparedStatement.setString(4, wishURL);
+            preparedStatement.executeUpdate();
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
