@@ -9,17 +9,17 @@ import java.sql.DriverManager;
 
 public class DBConnector {
 
-    static Connection connection;
+    static Connection con;
 
-    public static Connection connectDB() {
+    public Connection connectDB() {
         try {
             String url = "jdbc:mysql://dbwish.mysql.database.azure.com:3306/dbwish";
-            connection = DriverManager.getConnection(url, "Andromeda@dbwish", "TestMinHest4");
+            con = DriverManager.getConnection(url, "Andromeda@dbwish", "TestMinHest4");
             System.out.println("Det virker");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return connection;
+        return con;
     }
 
     // TESTDATA
