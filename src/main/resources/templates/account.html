@@ -23,11 +23,16 @@
 </head>
 <body>
 <h1>Account creation form</h1>
-<form name="form" action="/account" method="POST">
+<form name="form" id="signInForm" action="/account" method="POST">
 
     <label for="userName">Username</label><br>
     <input type="text" id="userName" name="userName" autocomplete="off" onkeyup="echoName(this.value);"/>
     <span id="free">:Username is not available</span><br><br>
+
+    <label for="emailAddress">Email</label><br>
+    <input type="email" id="emailAddress" name="emailAddress" autocomplete="off" onkeyup="validateEmail(this.value);"/>
+    <span id="valid">:Email is required</span><br><br>
+    <br><br>
 
     <label for="password">Password<br>(minimum 4 characters)</label><br>
     <input type="password" id="password" name="password" autocomplete="off" onkeyup="echoPass(this.value);"/>
@@ -42,9 +47,25 @@
 
 </form>
 <script th:inline="javascript">
+
     let uname = false;
     let upass = false;
     let check = false;
+    let umail = false;
+
+    disableEnter("userName");
+    disableEnter("emailAddress");
+    disableEnter("password");
+    disableEnter("password2");
+
+    function disableEnter(id) {
+        let el = document.getElementById(id);
+        el.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+            }
+        });
+    }
 
     function echoName(value) {
         let names = [[${userNames}]];
@@ -56,6 +77,19 @@
             uname = true;
         }
         showSubmit();
+    }
+
+    function validateEmail(email)
+    {
+        let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (pattern.test(email)) {
+            document.getElementById("valid").innerHTML = ":Email is valid";
+            umail = true;
+        }
+        else {
+            document.getElementById("valid").innerHTML = ":Email is not valid";
+            umail = false;
+        }
     }
 
     function echoPass(value) {
@@ -82,7 +116,7 @@
     }
 
     function showSubmit() {
-        if (uname && upass && check) {
+        if (uname && upass && check && umail) {
             document.getElementById("submitButton").className = "visible";
         } else {
             document.getElementById("submitButton").className = "hidden";
