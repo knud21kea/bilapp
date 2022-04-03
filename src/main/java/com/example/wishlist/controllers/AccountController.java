@@ -34,6 +34,7 @@ public class AccountController
     public String signup(Model model)
     {
         model.addAttribute("userNames", userNames);
+        model.addAttribute("userNamesDb", as.getAllUserNames());
         return "signup";
     }
 
@@ -48,6 +49,7 @@ public class AccountController
         userNames.add(user); // temp
         passwords.add(pass); // temp
         model.addAttribute("userNames", userNames); // need to fetch userNames from service
+        model.addAttribute("userNamesDb", as.getAllUserNames()); // fetched
         return "redirect:/index";
     }
 

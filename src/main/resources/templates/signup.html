@@ -23,17 +23,23 @@
 </head>
 <body>
 <h1>Account creation form</h1>
+<h3>Test: Fetch existing usernames from db ?!?</h3>
+<ul>
+    <li th:each="name: ${userNamesDb}">
+        <span th:text="${name}"></span>
+    </li>
+</ul>
 <form name="form" id="signInForm" action="/signup" method="POST">
 
-    <label for="userName">Username</label><br>
+    <label for="userName">Username<br>(No spaces)</label><br>
     <input type="text" id="userName" name="userName" autocomplete="off" onkeyup="echoName(this.value);"/>
-    <span id="free">:Username is not available</span><br><br>
+    <span id="free">:Username is required</span><br><br>
 
     <label for="emailAddress">Email</label><br>
     <input type="email" id="emailAddress" name="emailAddress" autocomplete="off" onkeyup="validateEmail(this.value);"/>
     <span id="valid">:Email is required</span><br><br>
 
-    <label for="password">Password<br>(minimum 4 characters)</label><br>
+    <label for="password">Password<br>(Minimum 4 characters)</label><br>
     <input type="password" id="password" name="password" autocomplete="off" onkeyup="echoPass(this.value);"/>
     <span id="length">: Password is too short</span><br><br>
 
@@ -59,7 +65,7 @@
 
     function disableEnter(id) {
         let el = document.getElementById(id);
-        el.addEventListener("keypress", function(event) {
+        el.addEventListener("keypress", function (event) {
             if (event.key === "Enter") {
                 event.preventDefault();
             }
@@ -67,26 +73,34 @@
     }
 
     function echoName(value) {
-        let names = [[${userNames}]];
-        if (names.includes(value)) {
-            document.getElementById("free").innerHTML = ":Username is not available";
+        let names = [[${userNamesDb}]];
+        if (value === "") {
+            document.getElementById("free").innerHTML = " :Username is required";
             uname = false;
         } else {
-            document.getElementById("free").innerHTML = ":Username is available";
-            uname = true;
+            if (value.includes(" ")) {
+                document.getElementById("free").innerHTML = " :Username cannot include spaces";
+                uname = false;
+            } else {
+                if (names.includes(value)) {
+                    document.getElementById("free").innerHTML = " :Username is not available";
+                    uname = false;
+                } else {
+                    document.getElementById("free").innerHTML = " :Username is available";
+                    uname = true;
+                }
+            }
         }
         showSubmit();
     }
 
-    function validateEmail(email)
-    {
+    function validateEmail(email) {
         let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (pattern.test(email)) {
-            document.getElementById("valid").innerHTML = ":Email is valid";
+            document.getElementById("valid").innerHTML = " :Email is valid";
             umail = true;
-        }
-        else {
-            document.getElementById("valid").innerHTML = ":Email is not valid";
+        } else {
+            document.getElementById("valid").innerHTML = " :Email is not valid";
             umail = false;
         }
         showSubmit();
@@ -97,7 +111,7 @@
             document.getElementById("length").innerHTML = ": Password is too short";
             upass = false;
         } else {
-            document.getElementById("length").innerHTML = ":Password is ok";
+            document.getElementById("length").innerHTML = " :Password is ok";
             upass = true;
         }
         passCheck();

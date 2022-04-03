@@ -30,4 +30,9 @@ public class AccountService
     {
         return null; // todo: method in DBHandler
     }
+
+    public ArrayList<String> getAllUserNames()
+    {
+        return dbh.getAllAccountNames();
+    }
 }
