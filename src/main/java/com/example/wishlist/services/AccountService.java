@@ -25,4 +25,9 @@ public class AccountService
     public void addAccountToDb(Account account) {
         dbh.insertAccountToDB(account);
     }
+
+    public Account getAccountFromUsername(String user)
+    {
+        return null; // todo: method in DBHandler
+    }
 }

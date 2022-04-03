@@ -38,15 +38,13 @@ public class AccountController
     }
 
     @PostMapping("/signup")
-    public String createAccount(HttpServletRequest request, WebRequest account, Model model)
+    public String createAccount(WebRequest account, Model model)
     {
         String user = account.getParameter("userName");
         String pass = account.getParameter("password");
         String mail = account.getParameter("emailAddress");
         Account sessionAccount = new Account(user, pass, mail); // Account object
-        //as.addAccountToDb(sessionAccount); // need to wait for a db connection
-        HttpSession session = request.getSession();
-        session.setAttribute("sessionAccount", sessionAccount); // added to session
+        as.addAccountToDb(sessionAccount); // added to db
         userNames.add(user); // temp
         passwords.add(pass); // temp
         model.addAttribute("userNames", userNames); // need to fetch userNames from service
@@ -59,16 +57,17 @@ public class AccountController
     }
 
     @PostMapping("/login")
-    public String submitLogin(HttpServletRequest request, WebRequest account, Model model)
+    public String submitLogin(HttpServletRequest request, WebRequest account)
     {
-        //todo: add username and password to session, here a temp test
+        //todo: add account to session, here a temp workaround
         String user = account.getParameter("userName");
         String pass = account.getParameter("password");
-        loggedin = as.checkLoginCredentials(user, pass, userNames, passwords);
+        loggedin = as.checkLoginCredentials(user, pass, userNames, passwords); // temp overload
         if (loggedin) {
             sessionUser = user;
-            //HttpSession session = request.getSession();
-            //session.setAttribute("sessionBasket", mySessionBasket);
+            HttpSession session = request.getSession();
+            Account sessionAccount = as.getAccountFromUsername(user);
+            session.setAttribute("sessionAccount", sessionAccount); // add account to session
         }
         else {
             sessionUser = "Guest";
