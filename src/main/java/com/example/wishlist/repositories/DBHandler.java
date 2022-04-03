@@ -77,19 +77,40 @@ public class DBHandler
         {
             ResultSet rs;
             Statement stmt;
-            String sqlString = "SELECT account_name from account;"; //Why not accounts??
+            String sqlString = "SELECT account_name from account ORDER BY account_id;"; //Why not accounts??
 
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = stmt.executeQuery(sqlString);
             while (rs.next())
             {
-                String name = rs.getString("account_name");
-                names.add(name);
+                names.add(rs.getString("account_name"));
             }
         } catch (SQLException e)
         {
             e.printStackTrace();
         }
         return names;
+    }
+
+    public ArrayList<String> getAllAccountPasswords()
+    {
+        ArrayList<String> passwords = new ArrayList<>();
+        try
+        {
+            ResultSet rs;
+            Statement stmt;
+            String sqlString = "SELECT account_password from account ORDER BY account_id;"; //Why not accounts??
+
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery(sqlString);
+            while (rs.next())
+            {
+                passwords.add(rs.getString("account_password"));
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return passwords;
     }
 }

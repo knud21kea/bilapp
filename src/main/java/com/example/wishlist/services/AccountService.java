@@ -11,15 +11,19 @@ public class AccountService
     private DBHandler dbh = new DBHandler();
 
     public boolean checkLoginCredentials(String username, String password) {
-        //todo: use repositry to check username exists and hashed password matches.
-        //If so, add the data to the session
-        return true;
-    }
-
-    // Temporary overload
-    public boolean checkLoginCredentials(String username, String password, ArrayList<String> n,ArrayList<String> p) {
-        int index = n.indexOf(username);
-        return  (Objects.equals(password, p.get(index)));
+        //Can now check against the db
+        //I think this can be done with a single sql query
+        ArrayList<String> names = dbh.getAllAccountNames();
+        ArrayList<String> passwords = dbh.getAllAccountPasswords();
+        int index = names.indexOf(username);
+        boolean match;
+        if (index >= 0) {
+            match = (Objects.equals(password, passwords.get(index)));
+        }
+        else {
+            match = false;
+        }
+        return match;
     }
 
     public void addAccountToDb(Account account) {

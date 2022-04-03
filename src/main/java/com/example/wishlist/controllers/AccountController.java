@@ -10,16 +10,12 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @Controller
 public class AccountController
 {
     // simulates the db
     private AccountService as = new AccountService();
-    private ArrayList<String> userNames = new ArrayList<>(Arrays.asList("", "a", "ab", "abc"));
-    private ArrayList<String> passwords = new ArrayList<>(Arrays.asList("0", "a1", "ab2", "abc3"));
     private String sessionUser = "Guest";
     private boolean loggedin = false;
 
@@ -33,7 +29,6 @@ public class AccountController
     @GetMapping("/signup")
     public String signup(Model model)
     {
-        model.addAttribute("userNames", userNames);
         model.addAttribute("userNamesDb", as.getAllUserNames());
         return "signup";
     }
@@ -46,9 +41,6 @@ public class AccountController
         String mail = account.getParameter("emailAddress");
         Account sessionAccount = new Account(user, pass, mail); // Account object
         as.addAccountToDb(sessionAccount); // added to db
-        userNames.add(user); // temp
-        passwords.add(pass); // temp
-        model.addAttribute("userNames", userNames); // need to fetch userNames from service
         model.addAttribute("userNamesDb", as.getAllUserNames()); // fetched
         return "redirect:/index";
     }
@@ -61,10 +53,11 @@ public class AccountController
     @PostMapping("/login")
     public String submitLogin(HttpServletRequest request, WebRequest account)
     {
-        //todo: add account to session, here a temp workaround
+        //account is now added to the session
         String user = account.getParameter("userName");
         String pass = account.getParameter("password");
-        loggedin = as.checkLoginCredentials(user, pass, userNames, passwords); // temp overload
+        loggedin = as.checkLoginCredentials(user, pass); // temp overload
+        System.out.println(loggedin);
         if (loggedin) {
             sessionUser = user;
             HttpSession session = request.getSession();
