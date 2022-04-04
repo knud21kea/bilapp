@@ -5,8 +5,17 @@ public class Wish {
     private String name;
     private String description;
     private String URL;
+    private String note;
     private double price;
     private boolean reservationStatus;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
     public String getName() {
         return name;
@@ -54,5 +63,6 @@ public class Wish {
         this.URL = URL;
         this.price = price;
         this.reservationStatus = false;
+        this.note = null;
     }
 }

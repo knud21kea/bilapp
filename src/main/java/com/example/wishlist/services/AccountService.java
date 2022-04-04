@@ -32,11 +32,12 @@ public class AccountService
 
     public Account getAccountFromUsername(String user)
     {
-        return null; // todo: method in DBHandler
+        return null; // todo: VI SKAL NOK IKKE BRUGE DEN ALLIGEVEL
     }
 
     public ArrayList<String> getAllUserNames()
     {
         return dbh.getAllAccountNames();
     }
+
 }

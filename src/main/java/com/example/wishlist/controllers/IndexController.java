@@ -11,10 +11,7 @@ public class IndexController {
     return "index";
     }*/
 
-    @GetMapping("/createWishlist")
-    public String createWishlist(){
-        return "createWishlist";
-    }
+
 
     @GetMapping("/wishLists")
     public String wishLists(){
