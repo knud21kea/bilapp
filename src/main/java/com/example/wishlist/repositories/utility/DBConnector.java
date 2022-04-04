@@ -25,8 +25,9 @@ public class DBConnector {
     public static void main(String[] args) {
 
         DBHandler dbHandler = new DBHandler();
-
         Account account = new Account("Torben", "kodeord", "email@torben.com");
+        System.out.println(dbHandler.getAccountIDFromAccountName("Pia"));;
+
        // dbHandler.insertAccountToDB(account);
 
         // WishList wishList = new WishList("FørsteWishList");
