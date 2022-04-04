@@ -61,7 +61,8 @@ public class AccountController
             sessionUser = user;
             HttpSession session = request.getSession();
             Account sessionAccount = as.getAccountFromUsername(user);
-            System.out.println(sessionAccount); //TODO Does not work
+            System.out.println(sessionAccount);
+            System.out.println("Hentede i login");
             session.setAttribute("sessionAccount", sessionAccount); // add account to session
         }
         else {

@@ -136,5 +136,22 @@ public class DBHandler {
         return accountId;
 
     }
+
+    public Account getAccountFromAccountID(int accountID){
+        ResultSet rs;
+        Account account = null;
+        try{
+            Statement stmt = con.createStatement();
+            String sqlString = "SELECT * FROM `account` WHERE account_id = '" + accountID + "';";
+            rs = stmt.executeQuery(sqlString);
+            rs.next();
+            account = new Account(rs.getString(1), rs.getString(2), rs.getString(3));
+
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        } return account;
+    }
+
 }
 

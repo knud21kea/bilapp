@@ -29,6 +29,7 @@ public class WishlistController {
 
         Account account = (Account) session.getAttribute("sessionAccount");
         System.out.println(account);
+        System.out.println("Hentede i createwishlist");
         ws.createWishList(account, wishlistName);
         System.out.println(wishlistName);
         return "redirect:/addwish";

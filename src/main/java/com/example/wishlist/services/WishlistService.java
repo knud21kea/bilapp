@@ -16,7 +16,6 @@ public class WishlistService {
         int accountID = dbh.getAccountIDFromAccountName(username);
 
 
-
         dbh.createWishList(accountID, wishlistName);
 
 

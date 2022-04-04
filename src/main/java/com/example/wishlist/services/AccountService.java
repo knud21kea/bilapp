@@ -32,7 +32,8 @@ public class AccountService
 
     public Account getAccountFromUsername(String user)
     {
-        return null; // todo: VI SKAL NOK IKKE BRUGE DEN ALLIGEVEL
+        int accountID = dbh.getAccountIDFromAccountName(user);
+        return dbh.getAccountFromAccountID(accountID);
     }
 
     public ArrayList<String> getAllUserNames()
