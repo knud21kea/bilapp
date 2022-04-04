@@ -12,20 +12,9 @@ public class DBHandler {
 
     private DBConnector dbc = new DBConnector();
     //TODO Spørg Nicklas om vi skal connecte hver gang vi kalder.
+    //TODO Vi connecter 2 gange
     private Connection con = dbc.connectDB();
 
-    //TODO Virker ikke før vi kan hente Account_ID.
-    public void insertWishListToDB(WishList wishList) {
-        String wishListName = wishList.getWishListName();
-        try {
-            PreparedStatement preparedStatement = con.prepareStatement
-                    ("INSERT INTO wishlist (`wishlist_name`) VALUES (?);");
-            preparedStatement.setString(1, wishListName);
-            preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     //TODO Virker ikke før vi kan hente wishlist_ID
     public void insertWishToDB(Wish wish) {
@@ -118,8 +107,17 @@ public class DBHandler {
         return (count == 1);
     }
 
-    public void createWishList() {
+    public void createWishList(int accountID, String name) {
 
+        try {
+        PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO wishlist (`account_id`, `wishlist_name`) VALUES (?,?);");
+        preparedStatement.setInt(1,accountID);
+        preparedStatement.setString(2,name);
+        preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public int getAccountIDFromAccountName(String name) {

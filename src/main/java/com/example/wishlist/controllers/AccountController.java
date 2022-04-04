@@ -61,11 +61,12 @@ public class AccountController
             sessionUser = user;
             HttpSession session = request.getSession();
             Account sessionAccount = as.getAccountFromUsername(user);
+            System.out.println(sessionAccount); //TODO Does not work
             session.setAttribute("sessionAccount", sessionAccount); // add account to session
         }
         else {
             sessionUser = "Guest";
         }
-        return "redirect:/index";
+        return "redirect:/createwishlist";
     }
 }

@@ -8,17 +8,16 @@ import javax.servlet.http.HttpSession;
 public class WishlistService {
     DBHandler dbh = new DBHandler();
 
-    public void createWishList(HttpSession session) {
-        //Get account from session
+    public void createWishList(Account account, String wishlistName) {
+
         //Get wishlist name from user
 
-        Account account = (Account) session.getAttribute("sessionAccount");
-        account.getAccountName();
+        String username = account.getAccountName();
+        int accountID = dbh.getAccountIDFromAccountName(username);
 
 
 
-
-        dbh.createWishList();
+        dbh.createWishList(accountID, wishlistName);
 
 
     }
