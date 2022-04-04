@@ -111,6 +111,32 @@ public class DBHandler
         {
             e.printStackTrace();
         }
+        String n = "Pia";
+        String p = "9876";
+        String s = "SELECT * FROM account WHERE `account_name`= '"+n+"' AND `account_password`='"+p+"';";
+        System.out.println(s);
         return passwords;
     }
+
+    public boolean validateCredentials(String n, String p)
+    {
+        int count=0;
+        try
+        {
+            ResultSet rs;
+            Statement stmt;
+            String sqlString = "SELECT * FROM account WHERE `account_name`= '"+n+"' AND `account_password`='"+p+"';";
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery(sqlString);
+            while (rs.next())
+            {
+                count++;
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return (count == 1);
+    }
 }
+

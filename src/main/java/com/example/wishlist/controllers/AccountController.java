@@ -57,7 +57,6 @@ public class AccountController
         String user = account.getParameter("userName");
         String pass = account.getParameter("password");
         loggedin = as.checkLoginCredentials(user, pass); // temp overload
-        System.out.println(loggedin);
         if (loggedin) {
             sessionUser = user;
             HttpSession session = request.getSession();

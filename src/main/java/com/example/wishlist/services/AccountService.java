@@ -11,7 +11,7 @@ public class AccountService
     private DBHandler dbh = new DBHandler();
 
     public boolean checkLoginCredentials(String username, String password) {
-        //Can now check against the db
+        /*//Can now check against the db
         //I think this can be done with a single sql query
         ArrayList<String> names = dbh.getAllAccountNames();
         ArrayList<String> passwords = dbh.getAllAccountPasswords();
@@ -22,8 +22,8 @@ public class AccountService
         }
         else {
             match = false;
-        }
-        return match;
+        }*/
+        return dbh.validateCredentials(username, password);
     }
 
     public void addAccountToDb(Account account) {
