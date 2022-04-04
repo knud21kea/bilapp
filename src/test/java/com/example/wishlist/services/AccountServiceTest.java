@@ -11,7 +11,7 @@ class AccountServiceTest
 {
     AccountService as = new AccountService();
 
-    @Test
+ /*   @Test
     void checkLoginCredentials()
     {
         //Arrange
@@ -32,4 +32,6 @@ class AccountServiceTest
         assertTrue(result2);
         assertFalse(result3);
     }
+
+  */
 }
