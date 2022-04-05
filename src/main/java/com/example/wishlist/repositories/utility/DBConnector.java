@@ -29,7 +29,7 @@ public class DBConnector {
 
 
         WishList wishList = new WishList("Bryllup");
-        dbHandler.createWishList(dbHandler.getAccountIDFromAccountName("Pia"), "fakewishlistname");
+        //dbHandler.createWishList(dbHandler.getAccountFromAccountName("Pia"), "fakewishlistname");
 
        // dbHandler.insertAccountToDB(account);
 

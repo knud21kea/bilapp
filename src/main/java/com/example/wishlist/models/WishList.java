@@ -5,11 +5,32 @@ import java.util.List;
 
 public class WishList {
 
+    private int wishlistID;
+    private int accountID;
     private ArrayList<Wish> wishList;
     private String wishListName;
 
+    public WishList(String wishListName) {
+        this.wishListName =  wishListName;
+    }
     public ArrayList<Wish> getWishList() {
         return wishList;
+    }
+
+    public int getWishlistID() {
+        return wishlistID;
+    }
+
+    public void setWishlistID(int wishlistID) {
+        this.wishlistID = wishlistID;
+    }
+
+    public int getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
 
     public void setWishList(ArrayList<Wish> wishList) {
@@ -24,7 +45,4 @@ public class WishList {
         this.wishListName = wishListName;
     }
 
-    public WishList(String wishListName) {
-        this.wishListName =  wishListName;
-    }
 }

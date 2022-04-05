@@ -2,7 +2,6 @@ package com.example.wishlist.repositories;
 
 import com.example.wishlist.models.Account;
 import com.example.wishlist.models.Wish;
-import com.example.wishlist.models.WishList;
 import com.example.wishlist.repositories.utility.DBConnector;
 
 import java.sql.*;
@@ -120,20 +119,21 @@ public class DBHandler {
         }
     }
 
-    public int getAccountIDFromAccountName(String name) {
+    public Account getAccountFromAccountName(String name) {
         ResultSet rs;
-        int accountId = 0;
+        Account account = null;
         try {
             Statement stmt = con.createStatement();
-            String sqlString = "SELECT account_id FROM `account` WHERE account_name = '" + name + "';";
+            String sqlString = "SELECT * FROM `account` WHERE account_name = '" + name + "';";
             rs = stmt.executeQuery(sqlString);
             rs.next();
-            accountId = rs.getInt(1);
+            account = new Account(rs.getString(1),rs.getString(2),rs.getString(3));
+            account.setAccountID(rs.getInt(0));
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return accountId;
+        return account;
 
     }
 

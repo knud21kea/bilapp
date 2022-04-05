@@ -4,7 +4,6 @@ import com.example.wishlist.models.Account;
 import com.example.wishlist.repositories.DBHandler;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class AccountService
 {
@@ -32,8 +31,7 @@ public class AccountService
 
     public Account getAccountFromUsername(String user)
     {
-        int accountID = dbh.getAccountIDFromAccountName(user);
-        return dbh.getAccountFromAccountID(accountID);
+        return dbh.getAccountFromAccountName(user);
     }
 
     public ArrayList<String> getAllUserNames()

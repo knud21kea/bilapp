@@ -2,6 +2,7 @@ package com.example.wishlist.models;
 
 public class Account {
 
+    private int accountID;
     private String accountName;
     private String password;
     private String email;
@@ -10,6 +11,14 @@ public class Account {
         this.accountName = userName;
         this.password = password;
         this.email = email;
+    }
+
+    public int getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
 
     public String getAccountName() {
