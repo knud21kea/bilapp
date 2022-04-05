@@ -24,9 +24,23 @@ public class WishlistController {
 
     @PostMapping("/createwishlist")
     public String createWishList (WebRequest request, HttpSession session){
+
         String wishlistName = request.getParameter("wishlistName");
+
         Account account = (Account) session.getAttribute("sessionAccount");
         ws.createWishList(account, wishlistName);
+
+        return "redirect:/addwish";
+    }
+
+    @PostMapping("/addwish")
+    public String addwish (WebRequest request, WishList wishList){
+
+        String wishName = request.getParameter("wishName");
+        String wishDescription = request.getParameter("wishDescription");
+        double wishPrice = Double.parseDouble(request.getParameter("wishPrice"));
+        String wishURL = request.getParameter("wishURL");
+        ws.createWish(wishName,wishDescription,wishPrice,wishURL,wishList);
         return "redirect:/addwish";
     }
 

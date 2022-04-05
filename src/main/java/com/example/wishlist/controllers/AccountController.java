@@ -27,8 +27,6 @@ public class AccountController
         return "index";
     }
 
-
-
     @GetMapping("/signup")
     public String signup(Model model)
     {
@@ -64,8 +62,8 @@ public class AccountController
             sessionUser = user;
             HttpSession session = request.getSession();
             Account sessionAccount = as.getAccountFromUsername(user);
-
             session.setAttribute("sessionAccount", sessionAccount); // add account to session
+
         }
         else {
             sessionUser = "Guest";

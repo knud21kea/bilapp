@@ -135,11 +135,11 @@ public class DBHandler {
         Account account = null;
         try {
             Statement stmt = con.createStatement();
-            String sqlString = "SELECT * FROM `account` WHERE account_name = '" + name + "';";
+            String sqlString = "SELECT * FROM `account` WHERE account_name = '" + name + "' ORDER BY `account_id`;";
             rs = stmt.executeQuery(sqlString);
             rs.next();
-            account = new Account(rs.getInt(0),rs.getString(1),rs.getString(2),rs.getString(3));
-
+            account = new Account(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
+            System.out.println(account);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -154,7 +154,7 @@ public class DBHandler {
             String sqlString = "SELECT * FROM `wishlist` WHERE account_id = '" + accountID + "';";
             rs = stmt.executeQuery(sqlString);
             while (rs.next()){
-                wishListArrayList.add(new WishList(rs.getInt(0),rs.getInt(1),rs.getString(2)));
+                wishListArrayList.add(new WishList(rs.getInt(1),rs.getInt(2),rs.getString(3)));
             }
 
         } catch (SQLException e) {
@@ -173,14 +173,14 @@ public class DBHandler {
             String sqlString = "SELECT * FROM `wish` WHERE wishlist_id = '" + wishlistID + "';";
             rs = stmt.executeQuery(sqlString);
             while (rs.next()){
-                int wishID = rs.getInt(0);
-                wishlistID = rs.getInt(1);
-                String name = rs.getString(2);
-                String description = rs.getString(3);
-                double price = rs.getDouble(4);
-                String url = rs.getString(5);
-                boolean reservationStatus = (rs.getInt(6) == 1);
-                String wishNote = rs.getString(7);
+                int wishID = rs.getInt(1);
+                wishlistID = rs.getInt(2);
+                String name = rs.getString(3);
+                String description = rs.getString(4);
+                double price = rs.getDouble(5);
+                String url = rs.getString(6);
+                boolean reservationStatus = (rs.getInt(7) == 1);
+                String wishNote = rs.getString(8);
 
                 wishlist.getWishList().add(new Wish(wishID,wishlistID,name,description,price,url,reservationStatus,wishNote));
             }
@@ -191,5 +191,7 @@ public class DBHandler {
 
        return wishlist;
     }
+
+
 }
 
