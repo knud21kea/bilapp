@@ -10,13 +10,13 @@ public class Account {
     private String email;
     private ArrayList<WishList> wishListArrayList;
 
-    public Account(String userName, String password, String email){
+    public Account(String userName, String email, String password){
         this.accountName = userName;
         this.password = password;
         this.email = email;
     }
 
-    public Account(int accountID,String userName, String password, String email) {
+    public Account(int accountID,String userName, String email, String password) {
         this.accountID = accountID;
         this.accountName = userName;
         this.password = password;
@@ -65,10 +65,6 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
-               "userName='" + accountName + '\'' +
-               ", password='" + password + '\'' +
-               ", email='" + email + '\'' +
-               '}';
+        return accountID + " " + accountName + " " +email;
     }
 }

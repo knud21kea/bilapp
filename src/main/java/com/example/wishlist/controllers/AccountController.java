@@ -20,7 +20,7 @@ public class AccountController
     private String sessionUser = "Guest";
     private boolean loggedin = false;
 
-    @GetMapping("/index")
+   @GetMapping("/index")
     public String start(Model model)
     {
         model.addAttribute("userName", sessionUser);
@@ -48,7 +48,7 @@ public class AccountController
 
     @GetMapping("/login")
     public String accountCreated() {
-        return "/login";
+        return "login";
     }
 
     @PostMapping("/login")
@@ -62,10 +62,8 @@ public class AccountController
             sessionUser = user;
             HttpSession session = request.getSession();
             Account sessionAccount = as.getAccountFromUsername(user);
-            System.out.println(sessionAccount);
-            System.out.println("Hentede i login");
-            //hent account ID
             session.setAttribute("sessionAccount", sessionAccount); // add account to session
+
         }
         else {
             sessionUser = "Guest";
