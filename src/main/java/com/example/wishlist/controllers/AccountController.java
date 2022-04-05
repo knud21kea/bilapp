@@ -53,7 +53,7 @@ public class AccountController
         return "redirect:/index";
     }
 
-    @GetMapping("/signin")
+    @GetMapping("/login")
     public String accountCreated() {
         return "login";
     }
