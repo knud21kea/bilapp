@@ -50,7 +50,7 @@ public class AccountController
 
     @GetMapping("/login")
     public String accountCreated() {
-        return "/login";
+        return "login";
     }
 
     @PostMapping("/login")
