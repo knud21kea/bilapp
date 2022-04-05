@@ -64,6 +64,7 @@ public class AccountController
             Account sessionAccount = as.getAccountFromUsername(user);
             System.out.println(sessionAccount);
             System.out.println("Hentede i login");
+            //hent account ID
             session.setAttribute("sessionAccount", sessionAccount); // add account to session
         }
         else {
