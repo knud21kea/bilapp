@@ -20,6 +20,13 @@ public class AccountController
     private String sessionUser = "Guest";
     private boolean loggedin = false;
 
+    @GetMapping("/")
+    public String landPage(Model model)
+    {
+        model.addAttribute("userName", sessionUser);
+        return "index";
+    }
+
    @GetMapping("/index")
     public String start(Model model)
     {
