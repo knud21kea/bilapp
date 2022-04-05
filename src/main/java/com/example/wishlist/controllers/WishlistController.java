@@ -32,9 +32,12 @@ public class WishlistController {
 
     @GetMapping("/addwish")
     public String addWish (Model model){
-
         return "addwish";
     }
 
+    @GetMapping("/specificWishList")
+    public String specificWishList(){
+        return "specificWishList";
+    }
 
 }

@@ -17,18 +17,28 @@ public class DBHandler {
 
 
     //TODO Virker ikke før vi kan hente wishlist_ID
-    public void insertWishToDB(Wish wish) {
+    public void insertWishToDB(Wish wish, WishList wishList) {
+        int wishlistID = wishList.getWishlistID();
         String wishName = wish.getName();
         String wishDescription = wish.getDescription();
-        String wishURL = wish.getURL();
         double wishPrice = wish.getPrice();
-        try {                           // Måske skal der være reservationStatus også?
+        String wishURL = wish.getURL();
+        int reservationStatus = 0;
+        if (wish.isReservationStatus()) {
+            reservationStatus = 1;
+        }
+        String wishNote = wish.getWishNote();
+
+        try {
             PreparedStatement preparedStatement = con.prepareStatement
-                    ("INSERT INTO wish (`wish_name`, `wish_description`, `wish_price`, `wish_url`) VALUES (?,?,?,?);");
-            preparedStatement.setString(1, wishName);
-            preparedStatement.setString(2, wishDescription);
-            preparedStatement.setDouble(3, wishPrice);
-            preparedStatement.setString(4, wishURL);
+                    ("INSERT INTO wish (`wishlist_id` , `wish_name` , `wish_description` , `wish_price`, `wish_url`, `reservation_status` , `wish_note`) VALUES (?,?,?,?,?,?,?);");
+            preparedStatement.setInt(1, wishlistID);
+            preparedStatement.setString(2, wishName);
+            preparedStatement.setString(3, wishDescription);
+            preparedStatement.setDouble(4, wishPrice);
+            preparedStatement.setString(5, wishURL);
+            preparedStatement.setInt(6,reservationStatus);
+            preparedStatement.setString(7,wishNote);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
