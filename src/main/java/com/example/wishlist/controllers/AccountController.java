@@ -49,7 +49,7 @@ public class AccountController
         Account sessionAccount = new Account(user, pass, mail); // Account object
         as.addAccountToDb(sessionAccount); // added to db
         model.addAttribute("userNamesDb", as.getAllUserNames()); // fetched
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping("/login")
