@@ -42,7 +42,6 @@ public class AccountController
         String mail = account.getParameter("emailAddress");
         Account sessionAccount = new Account(user, pass, mail); // Account object
         as.addAccountToDb(sessionAccount); // added to db
-        //hent object fra DB og tilføj ID
         model.addAttribute("userNamesDb", as.getAllUserNames()); // fetched
         return "redirect:/index";
     }

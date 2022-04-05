@@ -10,9 +10,12 @@ public class WishList {
     private ArrayList<Wish> wishList;
     private String wishListName;
 
-    public WishList(String wishListName) {
+    public WishList(int wishlistID, int accountID, String wishListName) {
+        this.wishlistID = wishlistID;
+        this.accountID = accountID;
         this.wishListName =  wishListName;
     }
+
     public ArrayList<Wish> getWishList() {
         return wishList;
     }
