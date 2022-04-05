@@ -4,10 +4,20 @@
   <meta charset="UTF-8">
   <title>Wishi</title>
   <link rel="stylesheet" th:href="@{css/index.css}">
+  <link rel="stylesheet" th:href="@{css/navbar.css}">
 </head>
 <body>
-<p>Welcome <span id="account" th:text="${userName}"></span></p>
-<button type="button" onclick="location.href='../signup'">Sign up</button>
-<button type="button" onclick="location.href='../login'">Sign in</button>
+<div>
+  <p>Welcome <span id="account" th:text="${userName}"></span></p>
+</div>
+<div>
+  <div class="navbar">
+    <a class="active" href="/signup">
+      <button type="button" onclick="location.href='../signup'">Sign up</button></a>
+    <a href="../login">Sign in</a>
+      <button type="button" onclick="location.href='../login'">Sign in</button>
+  </div>
+</div>
+
 </body>
 </html>
