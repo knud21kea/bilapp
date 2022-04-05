@@ -12,7 +12,7 @@ public class DBHandler {
 
     private DBConnector dbc = new DBConnector();
     //TODO Spørg Nicklas om vi skal connecte hver gang vi kalder.
-    //TODO Vi connecter 2 gange
+    //TODO Vi connecter 3 gange
     private Connection con = dbc.connectDB();
 
 
@@ -134,7 +134,6 @@ public class DBHandler {
             e.printStackTrace();
         }
         return accountId;
-
     }
 
     public Account getAccountFromAccountID(int accountID){
@@ -147,11 +146,9 @@ public class DBHandler {
             rs.next();
             account = new Account(rs.getString(1), rs.getString(2), rs.getString(3));
 
-
         } catch (SQLException e){
             e.printStackTrace();
         } return account;
     }
-
 }
 
