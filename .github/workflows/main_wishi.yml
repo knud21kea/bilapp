@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'wishi'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DC29E87D76DF4C0893AB509DB625028D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_628538BF70104B638C97E58835C9E19D }}
           package: '*.jar'

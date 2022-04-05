@@ -17,18 +17,28 @@ public class DBHandler {
 
 
     //TODO Virker ikke før vi kan hente wishlist_ID
-    public void insertWishToDB(Wish wish) {
+    public void insertWishToDB(Wish wish, WishList wishList) {
+        int wishlistID = wishList.getWishlistID();
         String wishName = wish.getName();
         String wishDescription = wish.getDescription();
-        String wishURL = wish.getURL();
         double wishPrice = wish.getPrice();
-        try {                           // Måske skal der være reservationStatus også?
+        String wishURL = wish.getURL();
+        int reservationStatus = 0;
+        if (wish.isReservationStatus()) {
+            reservationStatus = 1;
+        }
+        String wishNote = wish.getWishNote();
+
+        try {
             PreparedStatement preparedStatement = con.prepareStatement
-                    ("INSERT INTO wish (`wish_name`, `wish_description`, `wish_price`, `wish_url`) VALUES (?,?,?,?);");
-            preparedStatement.setString(1, wishName);
-            preparedStatement.setString(2, wishDescription);
-            preparedStatement.setDouble(3, wishPrice);
-            preparedStatement.setString(4, wishURL);
+                    ("INSERT INTO wish (`wishlist_id` , `wish_name` , `wish_description` , `wish_price`, `wish_url`, `reservation_status` , `wish_note`) VALUES (?,?,?,?,?,?,?);");
+            preparedStatement.setInt(1, wishlistID);
+            preparedStatement.setString(2, wishName);
+            preparedStatement.setString(3, wishDescription);
+            preparedStatement.setDouble(4, wishPrice);
+            preparedStatement.setString(5, wishURL);
+            preparedStatement.setInt(6,reservationStatus);
+            preparedStatement.setString(7,wishNote);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,35 +130,66 @@ public class DBHandler {
         }
     }
 
-    public int getAccountIDFromAccountName(String name) {
+    public Account getAccountFromAccountName(String name) {
         ResultSet rs;
-        int accountId = 0;
+        Account account = null;
         try {
             Statement stmt = con.createStatement();
-            String sqlString = "SELECT account_id FROM `account` WHERE account_name = '" + name + "';";
+            String sqlString = "SELECT * FROM `account` WHERE account_name = '" + name + "';";
             rs = stmt.executeQuery(sqlString);
             rs.next();
-            accountId = rs.getInt(1);
+            account = new Account(rs.getInt(0),rs.getString(1),rs.getString(2),rs.getString(3));
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return accountId;
+        return account;
     }
 
-    public Account getAccountFromAccountID(int accountID){
+    public ArrayList<WishList> getWishlistsFromAccountID(int accountID){
+        ArrayList<WishList> wishListArrayList = new ArrayList<>();
         ResultSet rs;
-        Account account = null;
-        try{
+        try {
             Statement stmt = con.createStatement();
-            String sqlString = "SELECT * FROM `account` WHERE account_id = '" + accountID + "';";
+            String sqlString = "SELECT * FROM `wishlist` WHERE account_id = '" + accountID + "';";
             rs = stmt.executeQuery(sqlString);
-            rs.next();
-            account = new Account(rs.getString(1), rs.getString(2), rs.getString(3));
+            while (rs.next()){
+                wishListArrayList.add(new WishList(rs.getInt(0),rs.getInt(1),rs.getString(2)));
+            }
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        } return account;
+        }
+
+        return wishListArrayList;
+    }
+
+    public WishList getWishesFromWishlistID (WishList wishlist){
+       int wishlistID = wishlist.getWishlistID();
+
+        ResultSet rs;
+        try {
+            Statement stmt = con.createStatement();
+            String sqlString = "SELECT * FROM `wish` WHERE wishlist_id = '" + wishlistID + "';";
+            rs = stmt.executeQuery(sqlString);
+            while (rs.next()){
+                int wishID = rs.getInt(0);
+                wishlistID = rs.getInt(1);
+                String name = rs.getString(2);
+                String description = rs.getString(3);
+                double price = rs.getDouble(4);
+                String url = rs.getString(5);
+                boolean reservationStatus = (rs.getInt(6) == 1);
+                String wishNote = rs.getString(7);
+
+                wishlist.getWishList().add(new Wish(wishID,wishlistID,name,description,price,url,reservationStatus,wishNote));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+       return wishlist;
     }
 }
 

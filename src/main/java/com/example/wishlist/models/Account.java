@@ -1,16 +1,34 @@
 package com.example.wishlist.models;
 
+import java.util.ArrayList;
+
 public class Account {
 
     private int accountID;
     private String accountName;
     private String password;
     private String email;
+    private ArrayList<WishList> wishListArrayList;
 
-    public Account(String userName, String password, String email) {
+    public Account(String userName, String password, String email){
         this.accountName = userName;
         this.password = password;
         this.email = email;
+    }
+
+    public Account(int accountID,String userName, String password, String email) {
+        this.accountID = accountID;
+        this.accountName = userName;
+        this.password = password;
+        this.email = email;
+    }
+
+    public ArrayList<WishList> getWishListArrayList() {
+        return wishListArrayList;
+    }
+
+    public void setWishListArrayList(ArrayList<WishList> wishListArrayList) {
+        this.wishListArrayList = wishListArrayList;
     }
 
     public int getAccountID() {

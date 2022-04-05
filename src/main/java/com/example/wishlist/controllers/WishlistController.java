@@ -25,20 +25,19 @@ public class WishlistController {
     @PostMapping("/createwishlist")
     public String createWishList (WebRequest request, HttpSession session){
         String wishlistName = request.getParameter("wishlistName");
-
         Account account = (Account) session.getAttribute("sessionAccount");
-        System.out.println(account);
-        System.out.println("Hentede i createwishlist");
         ws.createWishList(account, wishlistName);
-        System.out.println(wishlistName);
         return "redirect:/addwish";
     }
 
     @GetMapping("/addwish")
     public String addWish (Model model){
-
         return "addwish";
     }
 
+    @GetMapping("/specificWishList")
+    public String specificWishList(){
+        return "specificWishList";
+    }
 
 }

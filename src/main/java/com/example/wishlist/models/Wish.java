@@ -6,27 +6,28 @@ public class Wish {
     private int wishlistID;
     private String name;
     private String description;
-    private String URL;
-    private String note;
     private double price;
+    private String URL;
     private boolean reservationStatus;
     private String wishNote;
 
     public Wish(String name, String description, String URL, double price) {
         this.name = name;
         this.description = description;
-        this.URL = URL;
         this.price = price;
+        this.URL = URL;
         this.reservationStatus = false;
-        this.note = null;
     }
 
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
+    public Wish(int wishID, int wishlistID, String name, String description, double price, String URL, boolean reservationStatus, String wishNote) {
+        this.wishID = wishID;
+        this.wishlistID = wishlistID;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.URL = URL;
+        this.reservationStatus = reservationStatus;
+        this.wishNote = wishNote;
     }
 
     public String getName() {

@@ -5,6 +5,8 @@
   <title>Wishi</title>
   <link rel="stylesheet" th:href="@{css/index.css}">
   <link rel="stylesheet" th:href="@{css/navbar.css}">
+  <link rel="stylesheet" th:href="@{css/images.css}">
+  <link rel="stylesheet" th:href="@{css/footer.css}">
 </head>
 <body>
 <div>
@@ -15,6 +17,14 @@
     <button class="active" type="submit" onclick="location.href='/signup'">Sign up</button>
     <button class="active" type="submit" onclick="location.href='/login'">Sign in</button>
   </div>
+</div>
+
+<div class="dreamy-picture">
+  <img src="dreamy-picture.jpg">
+</div>
+
+<div class="properties">
+  <p th:insert="fragments/fragmentFooter.html" :: footer></p>
 </div>
 
 </body>
