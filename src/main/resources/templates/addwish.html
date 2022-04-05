@@ -6,6 +6,24 @@
 </head>
 <body>
 
-<h1>Helt sikkert</h1>
+<h1>Tilføj ønsker til din liste</h1>
+<form name ="form" action ="/addwish" method="POST">
+
+    <label for ="wishName" >Wish name</label>
+    <input type="text" id="wishName" name="wishName">
+
+    <label for ="wishDescription" >Wish description</label>
+    <input type="text" id="wishDescription" name="wishDescription">
+
+    <label for ="wishPrice" >Wish price</label>
+    <input type="number" id="wishPrice" name="wishPrice">
+
+    <label for ="wishURL" >Wish URL</label>
+    <input type="text" id="wishURL" name="wishURL">
+
+    <button id="submitButton" type="submit" onclick="location.href='../index'"></button>
+
+</form>
+<h2></h2>
 </body>
 </html>

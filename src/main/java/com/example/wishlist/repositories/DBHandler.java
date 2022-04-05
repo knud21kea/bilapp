@@ -11,13 +11,12 @@ import java.util.ArrayList;
 public class DBHandler {
 
     private DBConnector dbc = new DBConnector();
+    //TODO Spørg Nicklas om vi skal connecte hver gang vi kalder.
     //TODO Vi connecter 3 gange
     private Connection con = dbc.connectDB();
-    //TODO husk at lukke for connection til vores DB?
 
 
-    //TODO HUSK AT NÅR NOGET BLIVER LAGT PÅ DATABASEN SÅ SKAL DET HENTES IGEN OG TILFØJES TIL OBJEKTERNES LISTER
-    //Testet og virker
+    //TODO Virker ikke før vi kan hente wishlist_ID
     public void insertWishToDB(Wish wish, WishList wishList) {
         int wishlistID = wishList.getWishlistID();
         String wishName = wish.getName();
@@ -44,9 +43,8 @@ public class DBHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-    //Testet og virker
+
     public void insertAccountToDB(Account account) {
         String accountName = account.getAccountName();
         String password = account.getPassword();
@@ -61,7 +59,7 @@ public class DBHandler {
         } catch (Exception ignored) {
         }
     }
-    //Testet og virker
+
     public ArrayList<String> getAllAccountNames() {
         ArrayList<String> names = new ArrayList<>();
         try {
@@ -80,7 +78,45 @@ public class DBHandler {
         return names;
     }
 
-    //Is only called by WishlistService which sends an account, not an accountID.
+    public ArrayList<String> getAllAccountPasswords() {
+        ArrayList<String> passwords = new ArrayList<>();
+        try {
+            ResultSet rs;
+            Statement stmt;
+            String sqlString = "SELECT account_password from account ORDER BY account_id;"; //Why not accounts??
+
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery(sqlString);
+            while (rs.next()) {
+                passwords.add(rs.getString("account_password"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String n = "Pia";
+        String p = "9876";
+        String s = "SELECT * FROM account WHERE `account_name`= '" + n + "' AND `account_password`='" + p + "';";
+        System.out.println(s);
+        return passwords;
+    }
+
+    public boolean validateCredentials(String n, String p) {
+        int count = 0;
+        try {
+            ResultSet rs;
+            Statement stmt;
+            String sqlString = "SELECT * FROM account WHERE `account_name`= '" + n + "' AND `account_password`='" + p + "';";
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery(sqlString);
+            while (rs.next()) {
+                count++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (count == 1);
+    }
+
     public void createWishList(int accountID, String name) {
 
         try {
@@ -93,24 +129,42 @@ public class DBHandler {
             e.printStackTrace();
         }
     }
-    //Testet og virker
+
     public Account getAccountFromAccountName(String name) {
         ResultSet rs;
         Account account = null;
         try {
             Statement stmt = con.createStatement();
-            String sqlString = "SELECT * FROM `account` WHERE account_name = '" + name + "';";
+            String sqlString = "SELECT * FROM `account` WHERE account_name = '" + name + "' ORDER BY `account_id`;";
             rs = stmt.executeQuery(sqlString);
             rs.next();
             account = new Account(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
-
+            System.out.println(account);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return account;
     }
-    //Testet og virker
-    public WishList getWishesFromWishlist(WishList wishlist){
+
+    public ArrayList<WishList> getWishlistsFromAccountID(int accountID){
+        ArrayList<WishList> wishListArrayList = new ArrayList<>();
+        ResultSet rs;
+        try {
+            Statement stmt = con.createStatement();
+            String sqlString = "SELECT * FROM `wishlist` WHERE account_id = '" + accountID + "';";
+            rs = stmt.executeQuery(sqlString);
+            while (rs.next()){
+                wishListArrayList.add(new WishList(rs.getInt(1),rs.getInt(2),rs.getString(3)));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return wishListArrayList;
+    }
+
+    public WishList getWishesFromWishlistID (WishList wishlist){
        int wishlistID = wishlist.getWishlistID();
 
         ResultSet rs;
@@ -137,44 +191,7 @@ public class DBHandler {
 
        return wishlist;
     }
-    //Testet og virker - men forstår ikke hvorfor String s skal printes
-    public ArrayList<String> getAllAccountPasswords() {
-        ArrayList<String> passwords = new ArrayList<>();
-        try {
-            ResultSet rs;
-            Statement stmt;
-            String sqlString = "SELECT account_password from account ORDER BY account_id;"; //Why not accounts??
 
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = stmt.executeQuery(sqlString);
-            while (rs.next()) {
-                passwords.add(rs.getString("account_password"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        String n = "Pia";
-        String p = "9876";
-        String s = "SELECT * FROM account WHERE `account_name`= '" + n + "' AND `account_password`='" + p + "';";
-        System.out.println(s);
-        return passwords;
-    }
-    //Testet og virker
-    public boolean validateCredentials(String n, String p) {
-        int count = 0;
-        try {
-            ResultSet rs;
-            Statement stmt;
-            String sqlString = "SELECT * FROM account WHERE `account_name`= '" + n + "' AND `account_password`='" + p + "';";
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = stmt.executeQuery(sqlString);
-            while (rs.next()) {
-                count++;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (count == 1);
-    }
+
 }
 
