@@ -2,7 +2,6 @@ package com.example.wishlist.controllers;
 
 import com.example.wishlist.models.Account;
 import com.example.wishlist.services.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
