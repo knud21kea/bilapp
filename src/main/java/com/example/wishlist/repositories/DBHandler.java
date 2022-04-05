@@ -2,6 +2,7 @@ package com.example.wishlist.repositories;
 
 import com.example.wishlist.models.Account;
 import com.example.wishlist.models.Wish;
+import com.example.wishlist.models.WishList;
 import com.example.wishlist.repositories.utility.DBConnector;
 
 import java.sql.*;
@@ -11,7 +12,7 @@ public class DBHandler {
 
     private DBConnector dbc = new DBConnector();
     //TODO Spørg Nicklas om vi skal connecte hver gang vi kalder.
-    //TODO Vi connecter 2 gange
+    //TODO Vi connecter 3 gange
     private Connection con = dbc.connectDB();
 
 
@@ -119,22 +120,20 @@ public class DBHandler {
         }
     }
 
-    public Account getAccountFromAccountName(String name) {
+    public int getAccountIDFromAccountName(String name) {
         ResultSet rs;
-        Account account = null;
+        int accountId = 0;
         try {
             Statement stmt = con.createStatement();
-            String sqlString = "SELECT * FROM `account` WHERE account_name = '" + name + "';";
+            String sqlString = "SELECT account_id FROM `account` WHERE account_name = '" + name + "';";
             rs = stmt.executeQuery(sqlString);
             rs.next();
-            account = new Account(rs.getString(1),rs.getString(2),rs.getString(3));
-            account.setAccountID(rs.getInt(0));
+            accountId = rs.getInt(1);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return account;
-
+        return accountId;
     }
 
     public Account getAccountFromAccountID(int accountID){
@@ -147,11 +146,9 @@ public class DBHandler {
             rs.next();
             account = new Account(rs.getString(1), rs.getString(2), rs.getString(3));
 
-
         } catch (SQLException e){
             e.printStackTrace();
         } return account;
     }
-
 }
 
