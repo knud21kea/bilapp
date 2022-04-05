@@ -19,7 +19,6 @@ public class WishlistController {
 
     @GetMapping("/createwishlist")
     public String createWishlist (){
-
         return "createwishlist";
     }
 
