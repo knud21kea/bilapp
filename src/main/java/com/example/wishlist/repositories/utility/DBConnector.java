@@ -1,11 +1,13 @@
 package com.example.wishlist.repositories.utility;
 
 import com.example.wishlist.models.Account;
+import com.example.wishlist.models.Wish;
 import com.example.wishlist.models.WishList;
 import com.example.wishlist.repositories.DBHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ArrayList;
 
 public class DBConnector {
 
@@ -25,16 +27,22 @@ public class DBConnector {
     public static void main(String[] args) {
 
         DBHandler dbHandler = new DBHandler();
-        Account account = new Account("Torben", "kodeord", "email@torben.com");
 
+        Account account = new Account("søren", "password", "email@søren.com");
+        WishList wishList = new WishList(4,5,"wishlistname");
+        Wish wish = new Wish(1,2,"name","description",3.5,"url",true,"wishnote");
 
-        //WishList wishList = new WishList("Bryllup");
-        //dbHandler.createWishList(dbHandler.getAccountFromAccountName("Pia"), "fakewishlistname");
+        //ArrayList<Wish> arrayList = new ArrayList<>();
+        //arrayList.add(wish);
+        //wishList.setWishList(arrayList);
+        //dbHandler.insertWishToDB(wish,wishList);
+        //dbHandler.insertAccountToDB(account);
+        //System.out.println(dbHandler.getAllAccountNames());
+        //System.out.println(dbHandler.getAccountFromAccountName("søren"));
+        //System.out.println(dbHandler.getWishesFromWishlist(wishList));
+        //System.out.println(dbHandler.getAllAccountPasswords());
+        //System.out.println(dbHandler.validateCredentials("torben", "kodeord"));
 
-       // dbHandler.insertAccountToDB(account);
-
-        // WishList wishList = new WishList("FørsteWishList");
-        // dbHandler.insertWishListToDB(wishList);
     }
 }
 

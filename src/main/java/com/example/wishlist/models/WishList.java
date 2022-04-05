@@ -14,6 +14,7 @@ public class WishList {
         this.wishlistID = wishlistID;
         this.accountID = accountID;
         this.wishListName =  wishListName;
+        this.wishList = new ArrayList<>();
     }
 
     public ArrayList<Wish> getWishList() {
