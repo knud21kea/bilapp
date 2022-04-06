@@ -10,14 +10,15 @@ import javax.servlet.http.HttpSession;
 public class WishlistService {
     DBHandler dbh = new DBHandler();
 
-   public void createWishList(Account account, String wishlistName) {
+   public int createWishList(Account account, String wishlistName) {
         int accountID = account.getAccountID();
-        dbh.createWishList(accountID, wishlistName);
+        int wishlistID = dbh.createWishList(accountID, wishlistName);
+        return wishlistID;
     }
 
-    public void createWish(String wishName, String wishDescription, double wishPrice, String wishURL, WishList wishList) {
+    public void createWish(String wishName, String wishDescription, double wishPrice, String wishURL, int currentWishlistID) {
        Wish wish = new Wish(wishName,wishDescription,wishURL,wishPrice);
-       dbh.insertWishToDB(wish,wishList);
+       dbh.insertWishToDB(wish,currentWishlistID);
 
     }
 

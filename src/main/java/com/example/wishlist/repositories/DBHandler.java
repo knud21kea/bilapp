@@ -16,9 +16,8 @@ public class DBHandler {
     private Connection con = dbc.connectDB();
 
 
-
-    public void insertWishToDB(Wish wish, WishList wishList) {
-        int wishlistID = wishList.getWishlistID();
+    public void insertWishToDB(Wish wish, int currentWishlistID) {
+        int wishlistID = currentWishlistID;
         String wishName = wish.getName();
         String wishDescription = wish.getDescription();
         double wishPrice = wish.getPrice();
@@ -31,7 +30,7 @@ public class DBHandler {
 
         try {
             PreparedStatement preparedStatement = con.prepareStatement
-                    ("INSERT INTO wish (`wishlist_id` , `wish_name` , `wish_description` , `wish_price`, `wish_url`, `reservation_status` , `wish_note`) VALUES (?,?,?,?,?,?,?);");
+                    ("INSERT INTO `dbwish`.`wish` (`wishlist_id` , `wish_name` , `wish_description` , `wish_price`, `wish_url`, `reservation_status`,`wish_note`) VALUES (?,?,?,?,?,?,?);");
             preparedStatement.setInt(1, wishlistID);
             preparedStatement.setString(2, wishName);
             preparedStatement.setString(3, wishDescription);
@@ -133,18 +132,18 @@ public class DBHandler {
 
     //MUST ONLY BE USED RIGHT AFTER A WISHLIST HAS BEEN ADDED
     public int getLastWishlistID(int accountID){
-        int wishID = 0;
+        int wishlistID = 0;
         ResultSet rs;
         try {
             Statement stmt = con.createStatement();
             String sqlString = "SELECT MAX(wishlist_id) FROM wishlist WHERE account_id = '" + accountID + "';";
             rs = stmt.executeQuery(sqlString);
             rs.next();
-            wishID = rs.getInt(1);
+            wishlistID = rs.getInt(1);
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return wishID;
+        return wishlistID;
     }
 
     public Account getAccountFromAccountName(String name) {
