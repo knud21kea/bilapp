@@ -16,7 +16,7 @@ public class DBHandler {
     private Connection con = dbc.connectDB();
 
 
-    //TODO Virker ikke før vi kan hente wishlist_ID
+
     public void insertWishToDB(Wish wish, WishList wishList) {
         int wishlistID = wishList.getWishlistID();
         String wishName = wish.getName();
@@ -117,7 +117,8 @@ public class DBHandler {
         return (count == 1);
     }
 
-    public void createWishList(int accountID, String name) {
+    public int createWishList(int accountID, String name) {
+
         try {
         PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO wishlist (`account_id`, `wishlist_name`) VALUES (?,?);");
         preparedStatement.setInt(1,accountID);
@@ -127,8 +128,23 @@ public class DBHandler {
         }catch (SQLException e){
             e.printStackTrace();
         }
+        return getLastWishlistID(accountID);
+    }
 
-
+    //MUST ONLY BE USED RIGHT AFTER A WISHLIST HAS BEEN ADDED
+    public int getLastWishlistID(int accountID){
+        int wishID = 0;
+        ResultSet rs;
+        try {
+            Statement stmt = con.createStatement();
+            String sqlString = "SELECT MAX(wishlist_id) FROM wishlist WHERE account_id = '" + accountID + "';";
+            rs = stmt.executeQuery(sqlString);
+            rs.next();
+            wishID = rs.getInt(1);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return wishID;
     }
 
     public Account getAccountFromAccountName(String name) {
@@ -161,9 +177,11 @@ public class DBHandler {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return wishListArrayList;
     }
-
+    //TODO Det her navn giver ikke mening. Den får et wishlist objekt,
+    // tilføjer alle wishes fra DB til det objekts arrayliste og returnere objektet.
     public WishList getWishesFromWishlistID (WishList wishlist){
        int wishlistID = wishlist.getWishlistID();
 

@@ -7,7 +7,6 @@ import com.example.wishlist.repositories.DBHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.ArrayList;
 
 public class DBConnector {
 
@@ -29,8 +28,11 @@ public class DBConnector {
         DBHandler dbHandler = new DBHandler();
 
         Account account = new Account("søren", "password", "email@søren.com");
-        WishList wishList = new WishList(4,5,"wishlistname");
-        Wish wish = new Wish(1,2,"name","description",3.5,"url",true,"wishnote");
+        WishList wishList = new WishList(12,5,"wishlistname");
+        Wish wish = new Wish(1,2,"name","description",3.5,"url",true,"wishnote test");
+        //dbHandler.insertWishToDB(wish,dbHandler.getWishlistsFromAccountID(3).get(3));
+
+        System.out.println(dbHandler.getLastWishlistID(3));
 
         //ArrayList<Wish> arrayList = new ArrayList<>();
         //arrayList.add(wish);
@@ -42,7 +44,6 @@ public class DBConnector {
         //System.out.println(dbHandler.getWishesFromWishlist(wishList));
         //System.out.println(dbHandler.getAllAccountPasswords());
         //System.out.println(dbHandler.validateCredentials("torben", "kodeord"));
-
     }
 }
 
