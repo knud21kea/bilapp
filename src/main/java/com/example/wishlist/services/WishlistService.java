@@ -20,4 +20,14 @@ public class WishlistService {
        dbh.insertWishToDB(wish,wishList);
 
     }
+
+    public WishList getWishlistFromId(int id)
+    {
+        return dbh.getWishlistFromID(id);
+    }
+
+    public WishList getWishesFromWishlist(WishList wl)
+    {
+        return dbh.getWishesFromWishlistID(wl);
+    }
 }
