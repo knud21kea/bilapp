@@ -136,6 +136,8 @@ public class DBHandler {
 
     private Connection con;
 
+    private Connection con;
+
 
         }catch (SQLException e){
             e.printStackTrace();
