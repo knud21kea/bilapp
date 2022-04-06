@@ -118,7 +118,6 @@ public class DBHandler {
     }
 
     public void createWishList(int accountID, String name) {
-
         try {
         PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO wishlist (`account_id`, `wishlist_name`) VALUES (?,?);");
         preparedStatement.setInt(1,accountID);
@@ -128,6 +127,8 @@ public class DBHandler {
         }catch (SQLException e){
             e.printStackTrace();
         }
+
+
     }
 
     public Account getAccountFromAccountName(String name) {
@@ -160,7 +161,6 @@ public class DBHandler {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return wishListArrayList;
     }
 

@@ -20,4 +20,15 @@ public class WishlistService {
        dbh.insertWishToDB(wish,wishList);
 
     }
+
+    public void addArrayListOfWishlistsToAccount(Account account){
+       int accountID = account.getAccountID();
+        for (WishList wl : dbh.getWishlistsFromAccountID(accountID)) {
+            account.getWishListArrayList().add(wl);
+        }
+    }
+
+    public void addWishesToWishlist(){
+
+    }
 }
