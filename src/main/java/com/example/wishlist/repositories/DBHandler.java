@@ -11,12 +11,12 @@ import java.util.ArrayList;
 public class DBHandler {
 
     private DBConnector dbc = new DBConnector();
-    //TODO Spørg Nicklas om vi skal connecte hver gang vi kalder.
-    //TODO Vi connecter 3 gange
-    private Connection con = dbc.connectDB();
+
+    private Connection con;
 
 
     public void insertWishToDB(Wish wish, int currentWishlistID) {
+         con  = dbc.connectDB();
         int wishlistID = currentWishlistID;
         String wishName = wish.getName();
         String wishDescription = wish.getDescription();
@@ -39,12 +39,15 @@ public class DBHandler {
             preparedStatement.setInt(6,reservationStatus);
             preparedStatement.setString(7,wishNote);
             preparedStatement.executeUpdate();
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void insertAccountToDB(Account account) {
+        con = dbc.connectDB();
         String accountName = account.getAccountName();
         String password = account.getPassword();
         String email = account.getEmail();
@@ -55,11 +58,13 @@ public class DBHandler {
             preparedStatement.setString(2, email);
             preparedStatement.setString(3, password);
             preparedStatement.executeUpdate();
+            con.close();
         } catch (Exception ignored) {
         }
     }
 
     public ArrayList<String> getAllAccountNames() {
+        con = dbc.connectDB();
         ArrayList<String> names = new ArrayList<>();
         try {
             ResultSet rs;
@@ -71,6 +76,7 @@ public class DBHandler {
             while (rs.next()) {
                 names.add(rs.getString("account_name"));
             }
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,6 +84,7 @@ public class DBHandler {
     }
 
     public ArrayList<String> getAllAccountPasswords() {
+        con  = dbc.connectDB();
         ArrayList<String> passwords = new ArrayList<>();
         try {
             ResultSet rs;
@@ -89,6 +96,7 @@ public class DBHandler {
             while (rs.next()) {
                 passwords.add(rs.getString("account_password"));
             }
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -100,6 +108,7 @@ public class DBHandler {
     }
 
     public boolean validateCredentials(String n, String p) {
+        con = dbc.connectDB();
         int count = 0;
         try {
             ResultSet rs;
@@ -110,6 +119,7 @@ public class DBHandler {
             while (rs.next()) {
                 count++;
             }
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -117,12 +127,13 @@ public class DBHandler {
     }
 
     public int createWishList(int accountID, String name) {
-
+        con = dbc.connectDB();
         try {
         PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO wishlist (`account_id`, `wishlist_name`) VALUES (?,?);");
         preparedStatement.setInt(1,accountID);
         preparedStatement.setString(2,name);
         preparedStatement.executeUpdate();
+
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -140,6 +151,7 @@ public class DBHandler {
             rs = stmt.executeQuery(sqlString);
             rs.next();
             wishlistID = rs.getInt(1);
+            con.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -147,6 +159,7 @@ public class DBHandler {
     }
 
     public Account getAccountFromAccountName(String name) {
+        con = dbc.connectDB();
         ResultSet rs;
         Account account = null;
         try {
@@ -156,6 +169,7 @@ public class DBHandler {
             rs.next();
             account = new Account(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
             System.out.println(account);
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -163,6 +177,7 @@ public class DBHandler {
     }
 
     public ArrayList<WishList> getWishlistsFromAccountID(int accountID){
+        con = dbc.connectDB();
         ArrayList<WishList> wishListArrayList = new ArrayList<>();
         ResultSet rs;
         try {
@@ -172,7 +187,7 @@ public class DBHandler {
             while (rs.next()){
                 wishListArrayList.add(new WishList(rs.getInt(1),rs.getInt(2),rs.getString(3)));
             }
-
+        con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -182,6 +197,7 @@ public class DBHandler {
     //TODO Det her navn giver ikke mening. Den får et wishlist objekt,
     // tilføjer alle wishes fra DB til det objekts arrayliste og returnere objektet.
     public WishList getWishesFromWishlistID (WishList wishlist){
+        con = dbc.connectDB();
        int wishlistID = wishlist.getWishlistID();
 
         ResultSet rs;
@@ -201,7 +217,7 @@ public class DBHandler {
 
                 wishlist.getWishList().add(new Wish(wishID,wishlistID,name,description,price,url,reservationStatus,wishNote));
             }
-
+        con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

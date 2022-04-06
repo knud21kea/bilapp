@@ -8,7 +8,7 @@ import com.example.wishlist.repositories.DBHandler;
 import javax.servlet.http.HttpSession;
 
 public class WishlistService {
-    DBHandler dbh = new DBHandler();
+    private DBHandler dbh = new DBHandler();
 
    public int createWishList(Account account, String wishlistName) {
         int accountID = account.getAccountID();

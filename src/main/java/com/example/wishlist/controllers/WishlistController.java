@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class WishlistController {
-    private AccountService as = new AccountService();
     private WishlistService ws = new WishlistService();
 
     @GetMapping("/createwishlist")
