@@ -32,14 +32,4 @@ public class WishlistService {
     public void addWishesToWishlist(){
 
     }
-
-    public WishList getWishlistFromId(int id)
-    {
-        return dbh.getWishlistFromID(id);
-    }
-
-    public WishList getWishesFromWishlist(WishList wl)
-    {
-        return dbh.getWishesFromWishlistID(wl);
-    }
 }

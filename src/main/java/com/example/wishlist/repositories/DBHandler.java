@@ -134,11 +134,6 @@ public class DBHandler {
         preparedStatement.setString(2,name);
         preparedStatement.executeUpdate();
 
-    private Connection con;
-
-    private Connection con;
-
-
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -231,6 +226,7 @@ public class DBHandler {
 
     public WishList getWishlistFromID(int id)
     {
+        con = dbc.connectDB();
         ResultSet rs;
         WishList wl = null;
         try
@@ -244,7 +240,7 @@ public class DBHandler {
                 String name = rs.getString(3);
                 wl = new WishList(id, accountId, name);
             }
-
+            con.close();
         } catch (SQLException e)
         {
             e.printStackTrace();

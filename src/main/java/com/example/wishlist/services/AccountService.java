@@ -1,6 +1,7 @@
 package com.example.wishlist.services;
 
 import com.example.wishlist.models.Account;
+import com.example.wishlist.models.WishList;
 import com.example.wishlist.repositories.DBHandler;
 
 import java.util.ArrayList;
@@ -37,6 +38,16 @@ public class AccountService
     public ArrayList<String> getAllUserNames()
     {
         return dbh.getAllAccountNames();
+    }
+
+    public WishList getWishlistFromId(int id)
+    {
+        return dbh.getWishlistFromID(id);
+    }
+
+    public WishList getWishesFromWishlist(WishList wl)
+    {
+        return dbh.getWishesFromWishlistID(wl);
     }
 
 }

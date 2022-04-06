@@ -56,16 +56,4 @@ public class WishlistController {
     {
         return "specificWishList";
     }
-
-    @GetMapping("/reserve")
-    public String reserveWish(@RequestParam int wishlist, Model model)
-    {
-        ArrayList<Wish> listOfWishes;
-        WishList wlist = ws.getWishlistFromId(wishlist);
-        WishList wlistWishes = ws.getWishesFromWishlist(wlist);
-        listOfWishes = wlistWishes.getWishList();
-        model.addAttribute("currentWishlist", wlistWishes);
-        model.addAttribute("listOfWishes", listOfWishes);
-        return "reserve";
-    }
 }

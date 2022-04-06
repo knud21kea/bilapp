@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-
-
+<div class="navbar" th:fragment="navbar(span)">
+    <button class="home">WiSHi</button>
+    Wish list creation and sharing service.
+    <span th:replace="${span}"></span>
+</div>
 </body>
 </html>
