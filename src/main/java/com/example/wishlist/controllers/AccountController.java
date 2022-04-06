@@ -2,7 +2,6 @@ package com.example.wishlist.controllers;
 
 import com.example.wishlist.models.Account;
 import com.example.wishlist.services.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +18,13 @@ public class AccountController
     private AccountService as = new AccountService();
     private String sessionUser = "Guest";
     private boolean loggedin = false;
+
+    @GetMapping("/")
+    public String landPage(Model model)
+    {
+        model.addAttribute("userName", sessionUser);
+        return "index";
+    }
 
    @GetMapping("/index")
     public String start(Model model)
@@ -43,7 +49,7 @@ public class AccountController
         Account sessionAccount = new Account(user, pass, mail); // Account object
         as.addAccountToDb(sessionAccount); // added to db
         model.addAttribute("userNamesDb", as.getAllUserNames()); // fetched
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping("/login")
