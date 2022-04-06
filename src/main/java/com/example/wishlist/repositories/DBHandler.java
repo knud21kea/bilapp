@@ -134,6 +134,8 @@ public class DBHandler {
         preparedStatement.setString(2,name);
         preparedStatement.executeUpdate();
 
+    private Connection con;
+
 
         }catch (SQLException e){
             e.printStackTrace();
