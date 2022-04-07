@@ -49,8 +49,8 @@ public class DBHandler {
     public void insertAccountToDB(Account account) {
         con = dbc.connectDB();
         String accountName = account.getAccountName();
-        String password = account.getPassword();
         String email = account.getEmail();
+        String password = account.getPassword();
         try {
             PreparedStatement preparedStatement = con.prepareStatement
                     ("INSERT INTO account (`account_name`, `account_email`, `account_password`) VALUES (?,?,?);");
@@ -204,6 +204,7 @@ public class DBHandler {
             Statement stmt = con.createStatement();
             String sqlString = "SELECT * FROM `wish` WHERE wishlist_id = '" + wishlistID + "';";
             rs = stmt.executeQuery(sqlString);
+
             while (rs.next()){
                 int wishID = rs.getInt(1);
                 wishlistID = rs.getInt(2);
