@@ -20,7 +20,7 @@ public class AccountController
 {
     // simulates the db
     private AccountService as = new AccountService();
-    String sessionUser = "Guest";
+    private String sessionUser = "Guest";
     private boolean loggedin = false;
 
     @GetMapping("/")
@@ -67,6 +67,7 @@ public class AccountController
     @PostMapping("/login")
     public String submitLogin(HttpServletRequest request, WebRequest account)
     {
+        String redirect = "";
         //account is now added to the session
         String user = account.getParameter("userName");
         String pass = account.getParameter("password");
@@ -76,12 +77,14 @@ public class AccountController
             HttpSession session = request.getSession();
             Account sessionAccount = as.getAccountFromUsername(user);
             session.setAttribute("sessionAccount", sessionAccount); // add account to session
-
+            redirect = "redirect:/accountwishlists";
         }
         else {
             sessionUser = "Guest";
+            redirect = "redirect:/faillogin";
+
         }
-        return "redirect:/createwishlist";
+        return redirect;
     }
 
     @GetMapping("/reserve")
