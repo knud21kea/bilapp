@@ -42,56 +42,19 @@ public class Wish {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getURL() {
         return URL;
-    }
-
-    public void setURL(String URL) {
-        this.URL = URL;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public boolean isReservationStatus() {
         return reservationStatus;
-    }
-
-    public int getWishID() {
-        return wishID;
-    }
-
-    public void setWishID(int wishID) {
-        this.wishID = wishID;
-    }
-
-    public int getWishlistID() {
-        return wishlistID;
-    }
-
-    public void setWishlistID(int wishlistID) {
-        this.wishlistID = wishlistID;
     }
 
     public String getWishNote() {
         return wishNote;
     }
-
-    public void setWishNote(String wishNote) {
-        this.wishNote = wishNote;
-    }
-
-    public void setReservationStatus(boolean reservationStatus) {
-        this.reservationStatus = reservationStatus;
-    }
-
 }

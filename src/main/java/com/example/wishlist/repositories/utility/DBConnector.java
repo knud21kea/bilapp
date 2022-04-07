@@ -28,8 +28,8 @@ public class DBConnector {
         DBHandler dbHandler = new DBHandler();
 
         Account account = new Account("søren", "password", "email@søren.com");
-        WishList wishList = new WishList(12,5,"wishlistname");
-        Wish wish = new Wish(1,2,"name","description",3.5,"url",true,"wishnote test");
+        WishList wishList = new WishList(12, 5, "wishlistname");
+        Wish wish = new Wish(1, 2, "name", "description", 3.5, "url", true, "wishnote test");
         //dbHandler.insertWishToDB(wish,dbHandler.getWishlistsFromAccountID(3).get(3));
 
         System.out.println(dbHandler.getLastWishlistID(3));
