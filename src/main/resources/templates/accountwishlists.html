@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Account Wishlist</title>
+    <title>Account overview of wishlists</title>
+    <link rel="stylesheet" th:href="@{css/accountwishlists.css}">
+    <link rel="stylesheet" th:href="@{css/navbar.css}">
+    <link rel="stylesheet" th:href="@{css/footer.css}">
 </head>
 <body>
-<h1>Create a wishlist</h1>
-<form name = "createWishlist" action="createwishlist.html"></form>
+<div class="navbar" th:replace="fragments/navbar :: navbar(~{::span})">
+<span class="menu_right">
+    <span>Logged in as :</span>
+    <span id="account" th:text="${userName}"></span>
+</span>
 
-<h1>A list of your wishlists</h1>
+<div class="position">
+    <div class="inline-block">
+        <h3>Make a wish: </h3>
+        <button onclick="location.href='/createwishlist'">Create wishlist</button>
+    </div>
+    <div class="inline-block">
+        <h3>Your wishlists</h3>
+        <p class="square">
+           <h4>Wishlist</h4>
+           <h4>Wishlist</h4>
+           <h4>Wishlist</h4>
+           <h4>Wishlist</h4>
+        </p>
+    </div>
+</div>
+</div>
+<footer th:replace="fragments/footer">
+</footer>
 </body>
 </html>

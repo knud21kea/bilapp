@@ -33,4 +33,8 @@ public class AccountService {
         return dbh.getWishesFromWishlist(wl);
     }
 
+    public void reserveWish(int list, int wish) {
+        dbh.reserveWish(list, wish);
+    }
+
 }

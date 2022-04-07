@@ -50,7 +50,7 @@ public class AccountController {
         as.addAccountToDb(sessionAccount); // added to db
         model.addAttribute("userNamesDb", as.getAllUserNames()); // fetched
         model.addAttribute("username", sessionUser);
-        return "redirect:/";
+        return "redirect:/index";
     }
 
     @GetMapping("/login")
@@ -60,8 +60,8 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public String submitLogin(HttpServletRequest request, WebRequest account) {
-        String redirect = "";
+    public String submitLogin(HttpServletRequest request, WebRequest account)
+    {
         //account is now added to the session
         String user = account.getParameter("userName");
         String pass = account.getParameter("password");
@@ -71,13 +71,22 @@ public class AccountController {
             HttpSession session = request.getSession();
             Account sessionAccount = as.getAccountFromUsername(user);
             session.setAttribute("sessionAccount", sessionAccount); // add account to session
-            redirect = "redirect:/accountwishlists";
-        } else {
-            sessionUser = "Guest";
-            redirect = "redirect:/faillogin";
-
         }
-        return redirect;
+        else {
+            sessionUser = "Guest";
+        }
+        return (loggedin) ? "redirect:/accountwishlists" : "redirect:/faillogin";
+    }
+
+    @GetMapping("/accountwishlists")
+    public String seeAccountWistlists(Model model){
+        model.addAttribute("userName", sessionUser);
+        return "accountwishlists";
+    }
+
+    @GetMapping("/faillogin")
+    public String faillogin(){
+        return "faillogin";
     }
 
     @GetMapping("/reserve")
@@ -90,5 +99,14 @@ public class AccountController {
         model.addAttribute("listOfWishes", listOfWishes);
         model.addAttribute("username", sessionUser);
         return "reserve";
+    }
+
+    @GetMapping("/reservewish")
+    public String test(@RequestParam int list, int wish, Model model)
+    {
+        model.addAttribute("list", list);
+        model.addAttribute("wish", wish);
+        as.reserveWish(list, wish);
+        return "wishreserved";
     }
 }
