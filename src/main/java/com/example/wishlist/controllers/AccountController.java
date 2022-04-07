@@ -54,12 +54,13 @@ public class AccountController
 
     @GetMapping("/login")
     public String accountCreated() {
-        return "login";
+        return "signin";
     }
 
     @PostMapping("/login")
     public String submitLogin(HttpServletRequest request, WebRequest account)
     {
+        String redirect = "";
         //account is now added to the session
         String user = account.getParameter("userName");
         String pass = account.getParameter("password");
@@ -69,11 +70,13 @@ public class AccountController
             HttpSession session = request.getSession();
             Account sessionAccount = as.getAccountFromUsername(user);
             session.setAttribute("sessionAccount", sessionAccount); // add account to session
-
+            redirect = "redirect:/accountwishlists";
         }
         else {
             sessionUser = "Guest";
+            redirect = "redirect:/faillogin";
+
         }
-        return "redirect:/createwishlist";
+        return redirect;
     }
 }
