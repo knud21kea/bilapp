@@ -16,7 +16,6 @@ public class DBConnector {
         try {
             String url = "jdbc:mysql://dbwish.mysql.database.azure.com:3306/dbwish";
             con = DriverManager.getConnection(url, "Andromeda@dbwish", "TestMinHest4");
-            System.out.println("Det virker");
         } catch (Exception ignored) {
         }
         return con;
@@ -32,7 +31,9 @@ public class DBConnector {
         Wish wish = new Wish(1, 2, "name", "description", 3.5, "url", true, "wishnote test");
         //dbHandler.insertWishToDB(wish,dbHandler.getWishlistsFromAccountID(3).get(3));
 
-        System.out.println(dbHandler.getLastWishlistID(3));
+       // System.out.println(dbHandler.getLastWishlistID(3));
+
+        //dbHandler.reserveWish(4,1);
 
         //ArrayList<Wish> arrayList = new ArrayList<>();
         //arrayList.add(wish);

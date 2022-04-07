@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+<h3>Wish reserved</h3>
+<p>List ID : <span th:text="${list}"></span></p>
+<p>Wish ID : <span th:text="${wish}"></span></p>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Price</td>
+        <td>URL</td>
+    <tr th:each="wish : ${listOfWishes}">
+        <td th:text="${wish.getName()}"></td>
+        <td th:text="${wish.getDescription()}"></td>
+        <td th:text="${wish.getPrice()}"></td>
+        <td th:text="${wish.getURL()}"></td>
+    </tr>
+</table>
+<td>
+    <a  th:href="@{/reserve(wishlist=${list})}">
+    <button type="submit">Back to wishlist</button>
+    </a>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.example.wishlist.services;
 
 import com.example.wishlist.models.Account;
+import com.example.wishlist.models.Wish;
 import com.example.wishlist.models.WishList;
 import com.example.wishlist.repositories.DBHandler;
 
@@ -33,4 +34,13 @@ public class AccountService {
         return dbh.getWishesFromWishlist(wl);
     }
 
+    public void reserveWish(int list, int wish) {
+        dbh.reserveWish(list, wish);
+    }
+
+    public ArrayList<Wish> getUnreservedWishesFromWishlistID(int id) {
+        ArrayList<Wish> al;
+        al = dbh.getUnreservedWishesFromWishlistID(id);
+        return al;
+    }
 }
