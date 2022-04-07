@@ -14,25 +14,7 @@ body {
     vertical-align: middle;
 }
 
-h1{
-    font-family: fantasy;
-    font-size: 600%;
-    font-weight: bold;
-    margin-right: 50px;
-    padding-top: 50px;
+.square{
+    height: 300px;
+    width: 200px;
 }
-
-.hidden{
-    display: none;
-}
-
-.visible{
-    display: inline-block;
-}
-
-
-
-
-
-
-
