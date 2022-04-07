@@ -102,7 +102,7 @@ public class AccountController {
     }
 
     @GetMapping("/reservewish")
-    public String test(@RequestParam int list, int wish, Model model)
+    public String wishReserved(@RequestParam int list, int wish, Model model)
     {
         ArrayList<Wish> listOfWishes = as.getUnreservedWishesFromWishlistID(list);
         model.addAttribute("listOfWishes", listOfWishes);
