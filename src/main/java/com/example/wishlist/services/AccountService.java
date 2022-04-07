@@ -47,7 +47,7 @@ public class AccountService
 
     public WishList getWishesFromWishlist(WishList wl)
     {
-        return dbh.getWishesFromWishlistID(wl);
+        return dbh.getWishesFromWishlist(wl);
     }
 
 }

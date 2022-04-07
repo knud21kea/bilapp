@@ -14,9 +14,8 @@ public class DBHandler {
 
     private Connection con;
 
-
     public void insertWishToDB(Wish wish, int currentWishlistID) {
-         con  = dbc.connectDB();
+        con = dbc.connectDB();
         int wishlistID = currentWishlistID;
         String wishName = wish.getName();
         String wishDescription = wish.getDescription();
@@ -36,8 +35,8 @@ public class DBHandler {
             preparedStatement.setString(3, wishDescription);
             preparedStatement.setDouble(4, wishPrice);
             preparedStatement.setString(5, wishURL);
-            preparedStatement.setInt(6,reservationStatus);
-            preparedStatement.setString(7,wishNote);
+            preparedStatement.setInt(6, reservationStatus);
+            preparedStatement.setString(7, wishNote);
             preparedStatement.executeUpdate();
             con.close();
         } catch (Exception e) {
@@ -83,30 +82,6 @@ public class DBHandler {
         return names;
     }
 
-    public ArrayList<String> getAllAccountPasswords() {
-        con  = dbc.connectDB();
-        ArrayList<String> passwords = new ArrayList<>();
-        try {
-            ResultSet rs;
-            Statement stmt;
-            String sqlString = "SELECT account_password from account ORDER BY account_id;"; //Why not accounts??
-
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = stmt.executeQuery(sqlString);
-            while (rs.next()) {
-                passwords.add(rs.getString("account_password"));
-            }
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        String n = "Pia";
-        String p = "9876";
-        String s = "SELECT * FROM account WHERE `account_name`= '" + n + "' AND `account_password`='" + p + "';";
-        System.out.println(s);
-        return passwords;
-    }
-
     public boolean validateCredentials(String n, String p) {
         con = dbc.connectDB();
         int count = 0;
@@ -126,22 +101,23 @@ public class DBHandler {
         return (count == 1);
     }
 
-    public int createWishList(int accountID, String name) {
+    public int insertWishListToDB(int accountID, String name) {
         con = dbc.connectDB();
         try {
-        PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO wishlist (`account_id`, `wishlist_name`) VALUES (?,?);");
-        preparedStatement.setInt(1,accountID);
-        preparedStatement.setString(2,name);
-        preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO wishlist (`account_id`, `wishlist_name`) VALUES (?,?);");
+            preparedStatement.setInt(1, accountID);
+            preparedStatement.setString(2, name);
+            preparedStatement.executeUpdate();
 
-        }catch (SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return getLastWishlistID(accountID);
     }
 
     //MUST ONLY BE USED RIGHT AFTER A WISHLIST HAS BEEN ADDED
-    public int getLastWishlistID(int accountID){
+    public int getLastWishlistID(int accountID) {
         int wishlistID = 0;
         ResultSet rs;
         try {
@@ -151,7 +127,7 @@ public class DBHandler {
             rs.next();
             wishlistID = rs.getInt(1);
             con.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return wishlistID;
@@ -166,7 +142,7 @@ public class DBHandler {
             String sqlString = "SELECT * FROM `account` WHERE account_name = '" + name + "' ORDER BY `account_id`;";
             rs = stmt.executeQuery(sqlString);
             rs.next();
-            account = new Account(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
+            account = new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
             System.out.println(account);
             con.close();
         } catch (SQLException e) {
@@ -175,7 +151,7 @@ public class DBHandler {
         return account;
     }
 
-    public ArrayList<WishList> getWishlistsFromAccountID(int accountID){
+    public ArrayList<WishList> getWishlistsFromAccountID(int accountID) {
         con = dbc.connectDB();
         ArrayList<WishList> wishListArrayList = new ArrayList<>();
         ResultSet rs;
@@ -183,28 +159,29 @@ public class DBHandler {
             Statement stmt = con.createStatement();
             String sqlString = "SELECT * FROM `wishlist` WHERE account_id = '" + accountID + "';";
             rs = stmt.executeQuery(sqlString);
-            while (rs.next()){
-                wishListArrayList.add(new WishList(rs.getInt(1),rs.getInt(2),rs.getString(3)));
+            while (rs.next()) {
+                wishListArrayList.add(new WishList(rs.getInt(1), rs.getInt(2), rs.getString(3)));
             }
-        con.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return wishListArrayList;
     }
+
     //TODO Det her navn giver ikke mening. Den får et wishlist objekt,
     // tilføjer alle wishes fra DB til det objekts arrayliste og returnere objektet.
-    public WishList getWishesFromWishlistID (WishList wishlist){
+    public WishList getWishesFromWishlist(WishList wishlist) {
         con = dbc.connectDB();
-       int wishlistID = wishlist.getWishlistID();
+        int wishlistID = wishlist.getWishlistID();
 
         ResultSet rs;
         try {
             Statement stmt = con.createStatement();
             String sqlString = "SELECT * FROM `wish` WHERE wishlist_id = '" + wishlistID + "';";
             rs = stmt.executeQuery(sqlString);
-            while (rs.next()){
+            while (rs.next()) {
                 int wishID = rs.getInt(1);
                 wishlistID = rs.getInt(2);
                 String name = rs.getString(3);
@@ -214,35 +191,31 @@ public class DBHandler {
                 boolean reservationStatus = (rs.getInt(7) == 1);
                 String wishNote = rs.getString(8);
 
-                wishlist.getWishList().add(new Wish(wishID,wishlistID,name,description,price,url,reservationStatus,wishNote));
+                wishlist.getWishList().add(new Wish(wishID, wishlistID, name, description, price, url, reservationStatus, wishNote));
             }
-        con.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-       return wishlist;
+        return wishlist;
     }
 
-    public WishList getWishlistFromID(int id)
-    {
+    public WishList getWishlistFromID(int id) {
         con = dbc.connectDB();
         ResultSet rs;
         WishList wl = null;
-        try
-        {
+        try {
             Statement stmt = con.createStatement();
             String sqlString = "SELECT * FROM `wishlist` WHERE wishlist_id = '" + id + "';";
             rs = stmt.executeQuery(sqlString);
-            while (rs.next())
-            {
+            while (rs.next()) {
                 int accountId = rs.getInt(2);
                 String name = rs.getString(3);
                 wl = new WishList(id, accountId, name);
             }
             con.close();
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return wl;

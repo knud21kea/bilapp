@@ -35,7 +35,7 @@ public class WishlistController {
     }
 
     @PostMapping("/addwish")
-    public String addwish (WebRequest request, HttpSession session){
+    public String addWish (WebRequest request, HttpSession session){
         int currentWishlistID = (int) session.getAttribute("currentWishlistID");
         String wishName = request.getParameter("wishName");
         String wishDescription = request.getParameter("wishDescription");
