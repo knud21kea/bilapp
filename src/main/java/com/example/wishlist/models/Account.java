@@ -11,6 +11,7 @@ public class Account {
         this.accountName = userName;
         this.password = password;
         this.email = email;
+        wishListArrayList = new ArrayList<>();
     }
 
     public Account(int accountID, String userName, String email, String password) {
@@ -18,6 +19,7 @@ public class Account {
         this.accountName = userName;
         this.password = password;
         this.email = email;
+        wishListArrayList = new ArrayList<>();
     }
 
     public int getAccountID() {

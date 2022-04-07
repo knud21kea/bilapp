@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class DBHandler {
 
     private DBConnector dbc = new DBConnector();
-
     private Connection con;
 
     public void insertWishToDB(Wish wish, int currentWishlistID) {
@@ -48,8 +47,8 @@ public class DBHandler {
     public void insertAccountToDB(Account account) {
         con = dbc.connectDB();
         String accountName = account.getAccountName();
-        String password = account.getPassword();
         String email = account.getEmail();
+        String password = account.getPassword();
         try {
             PreparedStatement preparedStatement = con.prepareStatement
                     ("INSERT INTO account (`account_name`, `account_email`, `account_password`) VALUES (?,?,?);");

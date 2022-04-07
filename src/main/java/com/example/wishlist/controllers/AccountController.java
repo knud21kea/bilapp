@@ -44,9 +44,9 @@ public class AccountController {
     @PostMapping("/signup")
     public String createAccount(WebRequest account, Model model) {
         String user = account.getParameter("userName");
-        String pass = account.getParameter("password");
         String mail = account.getParameter("emailAddress");
-        Account sessionAccount = new Account(user, pass, mail); // Account object
+        String pass = account.getParameter("password");
+        Account sessionAccount = new Account(user, mail, pass); // Account object
         as.addAccountToDb(sessionAccount); // added to db
         model.addAttribute("userNamesDb", as.getAllUserNames()); // fetched
         model.addAttribute("username", sessionUser);
@@ -56,7 +56,7 @@ public class AccountController {
     @GetMapping("/login")
     public String accountCreated(Model model) {
         model.addAttribute("username", sessionUser);
-        return "login";
+        return "signin";
     }
 
     @PostMapping("/login")
