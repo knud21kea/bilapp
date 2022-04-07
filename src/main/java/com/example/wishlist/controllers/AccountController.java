@@ -94,9 +94,9 @@ public class AccountController {
         ArrayList<Wish> listOfWishes;
         WishList wlist = as.getWishlistFromId(wishlist);
         WishList wlistWishes = as.getWishesFromWishlist(wlist);
-        listOfWishes = wlistWishes.getWishList();
+        ArrayList<Wish> listOfWishes2 = as.getUnreservedWishesFromWishlistID(wishlist);
         model.addAttribute("currentWishlist", wlistWishes);
-        model.addAttribute("listOfWishes", listOfWishes);
+        model.addAttribute("listOfWishes", listOfWishes2);
         model.addAttribute("username", sessionUser);
         return "reserve";
     }
@@ -104,6 +104,8 @@ public class AccountController {
     @GetMapping("/reservewish")
     public String test(@RequestParam int list, int wish, Model model)
     {
+        ArrayList<Wish> listOfWishes = as.getUnreservedWishesFromWishlistID(list);
+        model.addAttribute("listOfWishes", listOfWishes);
         model.addAttribute("list", list);
         model.addAttribute("wish", wish);
         as.reserveWish(list, wish);

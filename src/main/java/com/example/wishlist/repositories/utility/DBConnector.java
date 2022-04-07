@@ -16,7 +16,6 @@ public class DBConnector {
         try {
             String url = "jdbc:mysql://dbwish.mysql.database.azure.com:3306/dbwish";
             con = DriverManager.getConnection(url, "Andromeda@dbwish", "TestMinHest4");
-            System.out.println("Det virker");
         } catch (Exception ignored) {
         }
         return con;

@@ -46,6 +46,11 @@ public class Wish {
         return URL;
     }
 
+    public int getWishID()
+    {
+        return wishID;
+    }
+
     public double getPrice() {
         return price;
     }
