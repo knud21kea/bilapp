@@ -151,27 +151,8 @@ public class DBHandler {
         return account;
     }
 
-    public ArrayList<WishList> getWishlistsFromAccountID(int accountID) {
-        con = dbc.connectDB();
-        ArrayList<WishList> wishListArrayList = new ArrayList<>();
-        ResultSet rs;
-        try {
-            Statement stmt = con.createStatement();
-            String sqlString = "SELECT * FROM `wishlist` WHERE account_id = '" + accountID + "';";
-            rs = stmt.executeQuery(sqlString);
-            while (rs.next()) {
-                wishListArrayList.add(new WishList(rs.getInt(1), rs.getInt(2), rs.getString(3)));
-            }
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return wishListArrayList;
-    }
-
-    //TODO Det her navn giver ikke mening. Den får et wishlist objekt,
-    // tilføjer alle wishes fra DB til det objekts arrayliste og returnere objektet.
+    // Den får et wishlist objekt,
+    // tilføjer alle wishes fra DB til det objekts arrayliste og returnerer objektet.
     public WishList getWishesFromWishlist(WishList wishlist) {
         con = dbc.connectDB();
         int wishlistID = wishlist.getWishlistID();
