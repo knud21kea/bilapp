@@ -11,9 +11,7 @@ import java.util.ArrayList;
 public class DBHandler {
 
     private DBConnector dbc = new DBConnector();
-
     private Connection con;
-
 
     public void insertWishToDB(Wish wish, int currentWishlistID) {
          con  = dbc.connectDB();
@@ -43,7 +41,6 @@ public class DBHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void insertAccountToDB(Account account) {
@@ -89,7 +86,7 @@ public class DBHandler {
         try {
             ResultSet rs;
             Statement stmt;
-            String sqlString = "SELECT account_password from account ORDER BY account_id;"; //Why not accounts??
+            String sqlString = "SELECT account_password FROM account ORDER BY account_id;"; //Why not accounts??
 
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = stmt.executeQuery(sqlString);

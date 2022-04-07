@@ -61,7 +61,7 @@ public class AccountController
     @GetMapping("/login")
     public String accountCreated(Model model) {
         model.addAttribute("username", sessionUser);
-        return "login";
+        return "signin";
     }
 
     @PostMapping("/login")
