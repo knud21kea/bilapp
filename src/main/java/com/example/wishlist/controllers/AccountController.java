@@ -99,4 +99,13 @@ public class AccountController
         model.addAttribute("username", sessionUser);
         return "reserve";
     }
+
+    @GetMapping("/reservewish")
+    public String test(@RequestParam int list, int wish, Model model)
+    {
+        model.addAttribute("list", list);
+        model.addAttribute("wish", wish);
+        as.reserveWish(list, wish);
+        return "wishreserved";
+    }
 }

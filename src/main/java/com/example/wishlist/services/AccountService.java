@@ -50,4 +50,8 @@ public class AccountService
         return dbh.getWishesFromWishlistID(wl);
     }
 
+    public void reserveWish(int list, int wish) {
+        dbh.reserveWish(list, wish);
+    }
+
 }

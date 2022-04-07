@@ -33,6 +33,9 @@
             <td th:text="${wish.getDescription()}"></td>
             <td th:text="${wish.getPrice()}"></td>
             <td th:text="${wish.getURL()}"></td>
+            <td><a  th:href="@{/reservewish(list=${currentWishlist.getWishlistID()}, wish=${wish.getWishID()})}">
+                <button type="submit">Reserve</button>
+            </a></td>
         </tr>
     </table>
 </div>

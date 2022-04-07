@@ -193,8 +193,6 @@ public class DBHandler {
 
         return wishListArrayList;
     }
-    //TODO Det her navn giver ikke mening. Den får et wishlist objekt,
-    // tilføjer alle wishes fra DB til det objekts arrayliste og returnere objektet.
     public WishList getWishesFromWishlistID (WishList wishlist){
         con = dbc.connectDB();
        int wishlistID = wishlist.getWishlistID();
