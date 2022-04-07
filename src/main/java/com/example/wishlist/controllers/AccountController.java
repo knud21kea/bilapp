@@ -16,38 +16,33 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
-public class AccountController
-{
+public class AccountController {
     // simulates the db
     private AccountService as = new AccountService();
     private String sessionUser = "Guest";
     private boolean loggedin = false;
 
     @GetMapping("/")
-    public String landPage(Model model)
-    {
+    public String landPage(Model model) {
         model.addAttribute("userName", sessionUser);
         return "index";
     }
 
-   @GetMapping("/index")
-    public String start(Model model)
-    {
+    @GetMapping("/index")
+    public String start(Model model) {
         model.addAttribute("userName", sessionUser);
         return "index";
     }
 
     @GetMapping("/signup")
-    public String signup(Model model)
-    {
+    public String signup(Model model) {
         model.addAttribute("userNamesDb", as.getAllUserNames());
         model.addAttribute("username", sessionUser);
         return "signup";
     }
 
     @PostMapping("/signup")
-    public String createAccount(WebRequest account, Model model)
-    {
+    public String createAccount(WebRequest account, Model model) {
         String user = account.getParameter("userName");
         String mail = account.getParameter("emailAddress");
         String pass = account.getParameter("password");
@@ -95,8 +90,7 @@ public class AccountController
     }
 
     @GetMapping("/reserve")
-    public String reserveWish(@RequestParam int wishlist, Model model)
-    {
+    public String reserveWish(@RequestParam int wishlist, Model model) {
         ArrayList<Wish> listOfWishes;
         WishList wlist = as.getWishlistFromId(wishlist);
         WishList wlistWishes = as.getWishesFromWishlist(wlist);
