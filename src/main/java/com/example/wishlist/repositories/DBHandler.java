@@ -277,6 +277,29 @@ public class DBHandler
         }
 
         return wl;
+    }public ArrayList<WishList> getWishlistsFromAccountID(int id)
+{
+    con = dbc.connectDB();
+    ResultSet rs;
+    ArrayList<WishList> wl = new ArrayList<>();
+    try
+    {
+        Statement stmt = con.createStatement();
+        String sqlString = "SELECT * FROM wishlist WHERE account_id = '" + id + "';";
+        rs = stmt.executeQuery(sqlString);
+        while (rs.next())
+        {
+            int w_id = rs.getInt(1);
+            int a_id = rs.getInt(2);
+            String wl_n = rs.getString(3);
+            wl.add(new WishList(w_id, a_id, wl_n));
+        }
+        con.close();
+    } catch (SQLException e)
+    {
+        e.printStackTrace();
     }
+    return wl;
+}
 }
 

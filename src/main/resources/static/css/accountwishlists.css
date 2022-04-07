@@ -34,3 +34,22 @@ body {
     margin-right: 20px;
     padding-top: 20px;
 }
+.container{
+    display: flex;
+    flex-direction: row;
+}
+.left{
+    width: 20%;
+    height: 100vh;
+    text-align: center;
+}
+.center{
+    width: 50%;
+    height: 100vh;
+    text-align: left;
+}
+
+.right{
+    width: 30%;
+    height: 100vh;
+}

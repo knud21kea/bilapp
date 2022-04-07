@@ -4,6 +4,8 @@ import com.example.wishlist.models.Account;
 import com.example.wishlist.models.Wish;
 import com.example.wishlist.repositories.DBHandler;
 
+import java.util.ArrayList;
+
 public class WishlistService {
     private DBHandler dbh = new DBHandler();
 

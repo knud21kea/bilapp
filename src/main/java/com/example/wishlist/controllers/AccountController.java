@@ -79,8 +79,12 @@ public class AccountController {
     }
 
     @GetMapping("/accountwishlists")
-    public String seeAccountWistlists(Model model){
+    public String seeAccountWistlists(Model model, HttpSession session){
+        Account user = (Account) session.getAttribute("sessionAccount");
+        int accountID = user.getAccountID();
+        ArrayList<WishList> wishlists =as.getWishlistsFromAccountID(accountID);
         model.addAttribute("userName", sessionUser);
+        model.addAttribute("wishlists", wishlists);
         return "accountwishlists";
     }
 

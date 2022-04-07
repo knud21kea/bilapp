@@ -15,14 +15,26 @@
     <span id="account" th:text="${userName}"></span>
 </span>
 </div>
-<div class="position">
-    <div class="inline-block">
-        <p class="position-text1"><h3>Make a wish: </h3></p>
-        <button class="position-text1" onclick="location.href='/createwishlist'">Create wishlist</button>
+<br><br>
+<div class="container">
+    <div class="left">
+        <h3>Make a wish:</h3>
+        <button onclick="location.href='/createwishlist'">Create wishlist</button>
     </div>
-    <div class="inline-block">
-        <p class="position-text2"><h3>Your wishlists</h3></p>
-        <p class="square"></p>
+    <div class="center">
+        <table>
+            <tr>
+                <td><h3>Your wishlists</h3></td>
+                <td><h3>URL to share</h3></td>
+            <tr th:each="wishlist : ${wishlists}">
+                <td th:text="${wishlist.getWishListName()}"></td>
+                <td>http://localhost:8080/reserve?wishlist=</td>
+                <td th:text="${wishlist.getWishlistID()}"><</td>
+            </tr>
+        </table>
+    </div>
+    <div class="right">
+        <img src="Cutie-no-background.png" th:height="500" th:width="350">
     </div>
 </div>
 <footer th:replace="fragments/footer">

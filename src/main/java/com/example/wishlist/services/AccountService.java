@@ -43,4 +43,8 @@ public class AccountService {
         al = dbh.getUnreservedWishesFromWishlistID(id);
         return al;
     }
+
+    public ArrayList<WishList> getWishlistsFromAccountID(int id) {
+        return dbh.getWishlistsFromAccountID(id);
+    }
 }
