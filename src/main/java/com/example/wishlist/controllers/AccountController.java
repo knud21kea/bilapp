@@ -85,7 +85,8 @@ public class AccountController {
     }
 
     @GetMapping("/faillogin")
-    public String faillogin(){
+    public String faillogin(Model model){
+        model.addAttribute("username", sessionUser);
         return "faillogin";
     }
 

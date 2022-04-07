@@ -14,22 +14,16 @@
     <span>Logged in as :</span>
     <span id="account" th:text="${userName}"></span>
 </span>
-
+</div>
 <div class="position">
     <div class="inline-block">
-        <h3>Make a wish: </h3>
-        <button onclick="location.href='/createwishlist'">Create wishlist</button>
+        <p class="position-text1"><h3>Make a wish: </h3></p>
+        <button class="position-text1" onclick="location.href='/createwishlist'">Create wishlist</button>
     </div>
     <div class="inline-block">
-        <h3>Your wishlists</h3>
-        <p class="square">
-           <h4>Wishlist</h4>
-           <h4>Wishlist</h4>
-           <h4>Wishlist</h4>
-           <h4>Wishlist</h4>
-        </p>
+        <p class="position-text2"><h3>Your wishlists</h3></p>
+        <p class="square"></p>
     </div>
-</div>
 </div>
 <footer th:replace="fragments/footer">
 </footer>

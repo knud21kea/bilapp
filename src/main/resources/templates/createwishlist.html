@@ -3,12 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Wishlist</title>
+    <link rel="stylesheet" th:href="@{css/createwishlist.css}">
+    <link rel="stylesheet" th:href="@{css/navbar.css}">
+    <link rel="stylesheet" th:href="@{css/footer.css}">
 </head>
 <body>
+<div class="navbar" th:replace="fragments/navbar :: navbar(~{::span})">
+<span class="menu_right">
+    <span>Logged in as :</span>
+    <span id="account" th:text="${userName}"></span>
+</span>
+</div>
+<div><br><br><br>
 <h1>Create your wishlist</h1>
 <form name = "wishlistCreation" action = "/createwishlist" method = "POST">
 <label for ="wishlistName" >Enter the name for your wishlist</label>
-    <input type = "text" id = "wishlistName" name = "wishlistName">
+    <input type = "text" id = "wishlistName" name = "wishlistName" autofocus>
+    <button onclick="location.href='/addwish'">Done - go to add wish</button>
 </form>
+</div>
+<footer th:replace="fragments/footer">
+</footer>
 </body>
 </html>

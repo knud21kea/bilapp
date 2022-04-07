@@ -1,11 +1,14 @@
 package com.example.wishlist.models;
 
+import java.util.ArrayList;
+
 public class Account {
 
     private int accountID;
     private String accountName;
     private String password;
     private String email;
+    private ArrayList<WishList> wishListArrayList;
 
     public Account(String userName, String email, String password) {
         this.accountName = userName;

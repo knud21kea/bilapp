@@ -4,17 +4,33 @@ body {
 }
 
 .position{
-    display: block;
-    padding-top: 20px;
-    margin-left: 90px;
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    padding-top: 50px;
 }
 
 .inline-block{
-    display: inline-block;
-    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .square{
     height: 300px;
     width: 200px;
+    background-color: whitesmoke;
+}
+
+.position-text1{
+    justify-content: flex-start;
+    margin-left: 20px;
+    padding-top: 20px;
+}
+
+.position-text2{
+    justify-content: flex-end;
+    margin-right: 20px;
+    padding-top: 20px;
 }

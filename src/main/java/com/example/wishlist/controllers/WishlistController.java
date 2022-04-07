@@ -15,7 +15,9 @@ public class WishlistController {
     private WishlistService ws = new WishlistService();
 
     @GetMapping("/createwishlist")
-    public String createWishlist() {
+    public String createWishlist(Model model, HttpSession session) {
+        Account sessionUser = (Account) session.getAttribute("sessionAccount");
+        model.addAttribute("userName", sessionUser.getAccountName());
         return "createwishlist";
     }
 
@@ -40,7 +42,9 @@ public class WishlistController {
     }
 
     @GetMapping("/addwish")
-    public String addWish(Model model) {
+    public String addWish(Model model, HttpSession session) {
+        Account sessionUser = (Account) session.getAttribute("sessionAccount");
+        model.addAttribute("userName", sessionUser.getAccountName());
         return "addwish";
     }
 

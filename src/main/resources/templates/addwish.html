@@ -2,15 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add wish</title>
+    <link rel="stylesheet" th:href="@{css/addwish.css}">
+    <link rel="stylesheet" th:href="@{css/navbar.css}">
+    <link rel="stylesheet" th:href="@{css/footer.css}">
 </head>
 <body>
-
+<div class="navbar" th:replace="fragments/navbar :: navbar(~{::span})">
+<span class="menu_right">
+    <span>Logged in as :</span>
+    <span id="account" th:text="${userName}"></span>
+</span>
+</div>
+<div><br><br><br>
 <h1>Add wishes to your wishlist</h1>
 <form name ="form" action ="/addwish" method="POST">
 
     <br><label for ="wishName" >Wish name</label>
-    <input type="text" id="wishName" name="wishName">
+    <input type="text" id="wishName" name="wishName" autofocus>
 
     <br><label for ="wishDescription" >Wish description</label>
     <input type="text" id="wishDescription" name="wishDescription">
@@ -22,8 +31,11 @@
     <input type="text" id="wishURL" name="wishURL">
     <br><br>
     <button id="submitButton" type="submit" onclick="location.href='../addwish'">Submit wish</button>
-
+    <button id="done" type="button" onclick="location.href='/accountwishlists'">Done</button>
 </form>
+</div>
 <h2></h2>
+<footer th:replace="fragments/footer">
+</footer>
 </body>
 </html>
