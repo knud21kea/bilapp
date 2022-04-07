@@ -3,5 +3,17 @@ body {
     background-size: cover;
 }
 
+.hidden{
+    display: none;
+}
+
+.visible{
+    display: inline-block;
+}
+
+
+
+
+
 
 

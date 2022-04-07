@@ -4,21 +4,32 @@
     <meta charset="UTF-8">
     <title>Sign in</title>
     <link rel="stylesheet" th:href="@{css/index.css}">
+    <link rel="stylesheet" th:href="@{css/navbar.css}">
+    <link rel="stylesheet" th:href="@{css/images.css}">
+    <link rel="stylesheet" th:href="@{css/footer.css}">
 </head>
 <body>
+<div class="navbar" th:replace="fragments/navbar :: navbar(~{::span})">
+<span class="menu_right">
+    <span th:text="${username}"></span>
+</span>
+</div>
+<br><br>
 <h1>Sign in form</h1>
 <form name="form" id="sign_in" action="/login" method="POST">
 
     <label for="userName">Username</label><br>
-    <input type="text" id="userName" name="userName" autocomplete="off"/>
+    <input type="text" id="userName" name="userName" autocomplete="off" autofocus/>
     <br><br>
 
     <label for="password">Password</label><br>
     <input type="password" id="password" name="password" autocomplete="off"/>
     <br><br>
 
+    <div>
     <button id="resetButton" class="visible" type="button" onclick="resetForm()">Reset form</button>
     <button id="submitButton" class="visible" type="submit" onclick="location.href='../login'">Submit</button>
+    </div>
 
 </form>
 <script th:inline="javascript">
@@ -40,5 +51,7 @@
         document.form.password.value = "";
     }
 </script>
+<footer th:replace="fragments/footer">
+</footer>
 </body>
 </html>

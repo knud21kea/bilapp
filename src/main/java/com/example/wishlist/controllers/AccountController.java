@@ -1,15 +1,19 @@
 package com.example.wishlist.controllers;
 
 import com.example.wishlist.models.Account;
+import com.example.wishlist.models.Wish;
+import com.example.wishlist.models.WishList;
 import com.example.wishlist.services.AccountService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Controller
 public class AccountController
@@ -37,6 +41,7 @@ public class AccountController
     public String signup(Model model)
     {
         model.addAttribute("userNamesDb", as.getAllUserNames());
+        model.addAttribute("username", sessionUser);
         return "signup";
     }
 
@@ -49,12 +54,14 @@ public class AccountController
         Account sessionAccount = new Account(user, pass, mail); // Account object
         as.addAccountToDb(sessionAccount); // added to db
         model.addAttribute("userNamesDb", as.getAllUserNames()); // fetched
+        model.addAttribute("username", sessionUser);
         return "redirect:/";
     }
 
     @GetMapping("/login")
-    public String accountCreated() {
-        return "signin";
+    public String accountCreated(Model model) {
+        model.addAttribute("username", sessionUser);
+        return "login";
     }
 
     @PostMapping("/login")
@@ -78,5 +85,18 @@ public class AccountController
 
         }
         return redirect;
+    }
+
+    @GetMapping("/reserve")
+    public String reserveWish(@RequestParam int wishlist, Model model)
+    {
+        ArrayList<Wish> listOfWishes;
+        WishList wlist = as.getWishlistFromId(wishlist);
+        WishList wlistWishes = as.getWishesFromWishlist(wlist);
+        listOfWishes = wlistWishes.getWishList();
+        model.addAttribute("currentWishlist", wlistWishes);
+        model.addAttribute("listOfWishes", listOfWishes);
+        model.addAttribute("username", sessionUser);
+        return "reserve";
     }
 }

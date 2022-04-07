@@ -8,9 +8,16 @@
     margin-left: 0px;
 }
 
-button{
+.menu_right{
     display: inline-block;
     float: right;
+    padding-left: 50px;
+    padding-right: 50px;
+    height: 50px;
+    font-size: large;
+    text-align: center;
+}
+.home {
     padding-left: 50px;
     padding-right: 50px;
     height: 50px;

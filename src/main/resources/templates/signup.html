@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Account</title>
+    <link rel="stylesheet" th:href="@{css/index.css}">
+    <link rel="stylesheet" th:href="@{css/navbar.css}">
+    <link rel="stylesheet" th:href="@{css/images.css}">
+    <link rel="stylesheet" th:href="@{css/footer.css}">
 </head>
 <body>
+<div class="navbar">
+    <button class="home">WiSHi</button>
+    Wish list creation and sharing service.
+</div>
+<br><br>
 <h1>Account creation form</h1>
-<h3>Test: Fetch existing usernames from db ?!?</h3>
-<ul>
-    <li th:each="name: ${userNamesDb}">
-        <span th:text="${name}"></span>
-    </li>
-</ul>
 <form name="form" id="signInForm" action="/signup" method="POST">
 
     <label for="userName">Username<br>(No spaces)</label><br>
-    <input type="text" id="userName" name="userName" autocomplete="off" onkeyup="echoName(this.value);"/>
+    <input type="text" id="userName" name="userName" autocomplete="off" autofocus onkeyup="echoName(this.value);"/>
     <span id="free">:Username is required</span><br><br>
 
     <label for="emailAddress">Email</label><br>
@@ -31,10 +34,11 @@
     <span id="check"></span><br><br><br>
 
     <button id="resetButton" class="visible" type="button" onclick="resetForm()">Reset form</button>
-    <button id="submitButton" class="visible" type="submit" onclick="location.href='../login'">Submit</button>
-
-
+    <button id="submitButton" class="hidden" type="submit" onclick="location.href='../login'">Submit</button>
 </form>
+
+<footer th:replace="fragments/footer">
+</footer>
 <script th:inline="javascript">
 
     let uname = false;
