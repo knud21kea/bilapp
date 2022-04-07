@@ -61,6 +61,17 @@ public class DBHandler {
         }
     }
 
+    public void reserveWish (int wishlistID, int wishID){
+        con = dbc.connectDB();
+        try {
+            String sqlString = "UPDATE wish SET reservation_status = 1 WHERE wishlist_id = '" + wishlistID + "'  AND wish_id = '" + wishID + "';";
+            PreparedStatement preparedStatement = con.prepareStatement(sqlString);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<String> getAllAccountNames() {
         con = dbc.connectDB();
         ArrayList<String> names = new ArrayList<>();
