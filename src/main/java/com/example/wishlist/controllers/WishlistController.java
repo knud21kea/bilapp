@@ -48,8 +48,8 @@ public class WishlistController {
         return "addwish";
     }
 
-    @GetMapping("/specificWishList")
+    @GetMapping("/specificwishlist")
     public String specificWishList() {
-        return "specificwishList";
+        return "specificwishlist";
     }
 }
