@@ -50,6 +50,6 @@ public class WishlistController {
 
     @GetMapping("/specificWishList")
     public String specificWishList() {
-        return "specificWishList";
+        return "specificwishList";
     }
 }
