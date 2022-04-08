@@ -10,36 +10,37 @@
 </head>
 <body>
 <div>
-<div class="navbar" th:insert="fragments/navbar :: navbar(~{::span})">
+    <div class="navbar" th:insert="fragments/navbar :: navbar(~{::span})">
 <span class="menu_right">
     Welcome - <span th:text="${username}"></span>
 </span>
-</div>
-<br><br>
-<p>Wish list from URL</p>
-<div>
-    <h2 th:text="${currentWishlist.getWishListName()}"></h2>
-</div>
-<div>
-    <h3>Has these wishes</h3>
-    <table>
-        <tr>
-            <td>Name</td>
-            <td>Description</td>
-            <td>Price</td>
-            <td>URL</td>
-        <tr th:each="wish : ${listOfWishes}">
-            <td th:text="${wish.getName()}"></td>
-            <td th:text="${wish.getDescription()}"></td>
-            <td th:text="${wish.getPrice()}"></td>
-            <td th:text="${wish.getURL()}"></td>
-            <td><a th:href="@{/reservewish(list=${currentWishlist.getWishlistID()}, wish=${wish.getWishID()})}">
-                <button type="submit">Reserve</button>
-            </a></td>
-        </tr>
-    </table>
-</div>
-</br>
+    </div>
+    <br><br>
+    <div>
+        <h2 th:text="${currentWishlist.getWishListName()}"></h2>
+    </div>
+    <div>
+        <h3>Here is a list of unreserved wishes:</h3>
+        <table>
+            <tr>
+                <td><h4>Reserve</h4></td>
+                <td><h4>Wishlist name</h4></td>
+                <td><h4>Description</h4></td>
+                <td><h4>Price</h4></td>
+                <td><h4>Link to wish</h4></td>
+            <tr th:each="wish : ${listOfWishes}">
+                <td><a th:href="@{/reservewish(list=${currentWishlist.getWishlistID()}, wish=${wish.getWishID()})}">
+                    <button type="submit">Reserve</button>
+                </a></td>
+                <td th:text="${wish.getName()}"></td>
+                <td th:text="${wish.getDescription()}"></td>
+                <td th:text="${wish.getPrice()}"></td>
+                <td th:text="${wish.getURL()}"></td>
+
+            </tr>
+        </table>
+    </div>
+    </br>
 </div>
 <footer th:replace="fragments/footer">
 </footer>
