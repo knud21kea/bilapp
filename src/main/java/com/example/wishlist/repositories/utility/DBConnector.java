@@ -12,6 +12,7 @@ public class DBConnector {
 
     static Connection con;
 
+    // con added
     public Connection connectDB() {
         try {
             String url = "jdbc:mysql://dbwish.mysql.database.azure.com:3306/dbwish";
