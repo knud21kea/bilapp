@@ -7,13 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class DepartmentController {
     private final IRepository<Department> departmentRepository = new DepartmentRepository();
 
     @GetMapping("/departments")
     public String allDepartments(Model model){
-        departmentRepository.getAllEntities();
+        model.addAttribute("departments", departmentRepository.getAllEntities());
         return "departments";
     }
 }

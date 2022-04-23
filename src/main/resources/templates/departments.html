@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Departments</title>
-    <link rel="stylesheet" th:href="@{style.css}"  type="text/css">
+    <link rel="stylesheet" th:href="@{style.css}" type="text/css">
 </head>
 <body>
-    <h1>An overview of our departments</h1>
-    <table>
-        <tr
-            th:each="department : ${departments}">
-            <td th:text="${department.getDeptno()}"></td>
-            <td th:text="${department.getDeptName()}"></td>
-            <td th:text="${department.getLocation()}"></td>
-        </tr>
-    </table>
+<h1>An overview of our departments</h1>
+<button onclick="window.location.href='/index'">Back to index</button>
+<br><br>
+<table>
+    <th>Dept</th>
+    <th>Name</th>
+    <th>Location</th>
+    <tr th:each="department : ${departments}">
+        <td th:text="${department.getDeptno()}"></td>
+        <td th:text="${department.getDeptName()}"></td>
+        <td th:text="${department.getLocation()}"></td>
+    </tr>
+</table>
 </body>
 </html>

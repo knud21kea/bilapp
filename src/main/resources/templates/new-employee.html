@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add employee</title>
+    <link rel="stylesheet" th:href="@{style.css}"  type="text/css">
+</head>
+<body>
+    <h1>Add a new employee here</h1>
+    <button onclick="window.location.href='/index'">Back to index</button>
+    <br><br>
+    <form action="/created">
+        <label for="name">Enter name:&nbsp</label>
+        <input type="text" id="name" name="name" required autofocus>
+        <br><br>
+
+        <label for="job">Choose job:&nbsp</label>
+        <select name="job" id="job">
+            <option value="CLERK">Clerk</option>
+            <option value="SALESMAN">Salesman</option>
+            <option value="MANAGER">Manager</option>
+            <option value="ANALYST">Analyst</option>
+        </select>
+        <br><br>
+
+        <label for="manager">Choose manager:&nbsp</label>
+        <select name="manager" id="manager">
+            <option value="7566">Jones</option>
+            <option value="7698">Blake</option>
+            <option value="7782">Clark</option>
+            <option value="7788">Scott</option>
+            <option value="7839">King</option>
+            <option value="7902">Ford</option>
+        </select>
+        <br><br>
+
+        <label for="salary">Enter salary:&nbsp</label>
+        <input type="number" id="salary" name="salary" required>
+        <br><br>
+
+        <label for="dept">Choose department:&nbsp</label>
+        <select name="dept" id="dept">
+            <option value="10">Accounting</option>
+            <option value="20">Research</option>
+            <option value="30">Sales</option>
+            <option value="40">Operations</option>
+        </select>
+        <br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

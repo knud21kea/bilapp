@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>One employee</title>
+    <link rel="stylesheet" th:href="@{style.css}"  type="text/css">
+</head>
+<body>
+<h1>A single employee</h1>
+<button onclick="window.location.href='/index'">Back to index</button>
+<br><br>
+<form action="/employee">
+    <label for="id">ID to find</label>
+    <input type="number" id="id" name="id" autofocus>
+    <input type="submit">
+</form>
+<br><br>
+<table>
+    <th>Employee</th>
+    <th>Name</th>
+    <th>Job</th>
+    <th>Manager</th>
+    <th>Hire date</th>
+    <th>Salary</th>
+    <th>Commission</th>
+    <th>Dept</th>
+    <tr>
+        <td th:text="${employee.getEmpNo()}"></td>
+        <td th:text="${employee.getEmpName()}"></td>
+        <td th:text="${employee.getEmpJob()}"></td>
+        <td th:text="${employee.getEmpMan()}"></td>
+        <td th:text="${employee.getEmpHireDate()}"></td>
+        <td th:text="${employee.getEmpSalary()}"></td>
+        <td th:text="${employee.getEmpComm()}"></td>
+        <td th:text="${employee.getEmpDeptNo()}"></td>
+    </tr>
+</table>
+</body>
+</html>
