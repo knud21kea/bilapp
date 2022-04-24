@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Added</title>
+    <link rel="stylesheet" th:href="@{style.css}" type="text/css">
+</head>
+<body>
+<button onclick="window.location.href='/index'">Back to index</button>
+<br>
+<h1>Employee was added successfully</h1>
+<br>
+<table>
+    <th>Name</th>
+    <th>Job</th>
+    <tr>
+        <td th:text="${name}"></td>
+        <td th:text="${job}"></td>
+    </tr>
+</table>
+</body>
+</html>

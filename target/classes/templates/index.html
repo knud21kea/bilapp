@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" th:href="@{style.css}" type="text/css">
+</head>
+<body>
+<h1>Welcome to Employees & Departments !!!!!</h1>
+<button onclick="window.location.href='/departments'">All departments</button>
+<button onclick="window.location.href='/employees'">All employees</button>
+<button onclick="window.location.href='/employee?id=7839'">One employee</button>
+<button onclick="window.location.href='/create'">Add employee</button>
+<button onclick="window.location.href='/bydept?name=ACCOUNTING'">Dept employees</button>
+</body>
+</html>

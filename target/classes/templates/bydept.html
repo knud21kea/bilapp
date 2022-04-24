@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>By department</title>
+    <link rel="stylesheet" th:href="@{style.css}" type="text/css">
+</head>
+<body>
+<button onclick="window.location.href='/index'">Back to index</button>
+<br>
+<h1>Employees by department name - listing by <span th:text="${deptName}"></span></h1>
+<br>
+<form action="/bydept">
+    <label for="name">Choose department name:&nbsp</label>
+    <select name="name" id="name">
+        <option value="ACCOUNTING">Accounting</option>
+        <option value="RESEARCH">Research</option>
+        <option value="SALES">Sales</option>
+        <option value="OPERATIONS">Operations</option>
+    </select>
+    <input type="submit" value="Submit">
+</form>
+<br><br>
+<table>
+    <th>Employee</th>
+    <th>Name</th>
+    <th>Job</th>
+    <th>Manager</th>
+    <th>Hire date</th>
+    <th>Salary</th>
+    <th>Commission</th>
+    <th>Dept</th>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.getEmpNo()}"></td>
+        <td th:text="${employee.getEmpName()}"></td>
+        <td th:text="${employee.getEmpJob()}"></td>
+        <td th:text="${employee.getEmpMan()}"></td>
+        <td th:text="${employee.getEmpHireDate()}"></td>
+        <td th:text="${employee.getEmpSalary()}"></td>
+        <td th:text="${employee.getEmpComm()}"></td>
+        <td th:text="${employee.getEmpDeptNo()}"></td>
+    </tr>
+</table>
+</body>
+</html>
