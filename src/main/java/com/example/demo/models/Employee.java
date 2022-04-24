@@ -2,7 +2,8 @@ package com.example.demo.models;
 
 import java.util.Date;
 
-public class Employee {
+public class Employee
+{
     private int empNo;
     private String empName;
     private String empJob;

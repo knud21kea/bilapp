@@ -12,16 +12,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class EmployeeRepository implements IRepository<Employee> {
+public class EmployeeRepository implements IRepository<Employee>
+{
 
     @Override
-    public List<Employee> getAllEntities() {
+    public List<Employee> getAllEntities()
+    {
         Connection conn = DatabaseConnectionManager.getConnection();
         List<Employee> allEmployees = new ArrayList<Employee>();
-        try {
+        try
+        {
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM employees");
             ResultSet rs = pstmt.executeQuery();
-            while(rs.next()){
+            while (rs.next())
+            {
                 Employee temp = new Employee(
                         rs.getInt(1),
                         rs.getString(2),
@@ -35,7 +39,8 @@ public class EmployeeRepository implements IRepository<Employee> {
                 allEmployees.add(temp);
             }
 
-        }catch(SQLException e){
+        } catch (SQLException e)
+        {
             System.out.println("Something wrong in statement");
             e.printStackTrace();
         }
@@ -43,27 +48,30 @@ public class EmployeeRepository implements IRepository<Employee> {
     }
 
     @Override
-    public Employee getSingleById(int id) {
+    public Employee getSingleById(int id)
+    {
         Connection conn = DatabaseConnectionManager.getConnection();
         Employee temp = null;
-        try {
+        try
+        {
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM employees WHERE employees.id = '" + id + "'");
             ResultSet rs = pstmt.executeQuery();
-                while (rs.next())
-                {
-                    temp = new Employee(
-                            rs.getInt(1),
-                            rs.getString(2),
-                            rs.getString(3),
-                            rs.getInt(4),
-                            rs.getDate(5),
-                            rs.getInt(6),
-                            rs.getInt(7),
-                            rs.getInt(8)
-                    );
-                }
+            while (rs.next())
+            {
+                temp = new Employee(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getDate(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8)
+                );
+            }
 
-        }catch(SQLException e){
+        } catch (SQLException e)
+        {
             System.out.println("Something wrong in statement");
             e.printStackTrace();
         }
@@ -71,7 +79,8 @@ public class EmployeeRepository implements IRepository<Employee> {
     }
 
     @Override
-    public boolean create(Employee entity) {
+    public boolean create(Employee entity)
+    {
         Connection conn = DatabaseConnectionManager.getConnection();
         try
         {
@@ -95,14 +104,17 @@ public class EmployeeRepository implements IRepository<Employee> {
     }
 
     @Override
-    public List<Employee> getAllWithConstraint(String name) {
+    public List<Employee> getAllWithConstraint(String name)
+    {
         Connection conn = DatabaseConnectionManager.getConnection();
         List<Employee> employeesByDept = new ArrayList<Employee>();
-        try {
+        try
+        {
             PreparedStatement pstmt = conn.prepareStatement
                     ("SELECT * FROM employees, departments WHERE employees.department_number=departments.department_number AND departments.department_name='" + name + "'");
-            ResultSet rs = pstmt.executeQuery();
-            while(rs.next()){
+            ResultSet rs = pstmt.executeQuery(); // Should move to a method
+            while (rs.next())
+            {
                 Employee temp = new Employee(
                         rs.getInt(1),
                         rs.getString(2),
@@ -116,7 +128,8 @@ public class EmployeeRepository implements IRepository<Employee> {
                 employeesByDept.add(temp);
             }
 
-        }catch(SQLException e){
+        } catch (SQLException e)
+        {
             System.out.println("Something wrong in statement");
             e.printStackTrace();
         }

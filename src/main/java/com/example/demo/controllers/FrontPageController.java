@@ -1,3 +1,15 @@
+/*
+
+Original code by @Nicklas Dean
+Developed by @Graham Heaven
+
+KEA Datamatiker exercises with Java Spring, Thymeleaf, mySQL
+April 2022
+
+Demo for use of Interface as repo, and with Singleton pattern (DB connector).
+
+ */
+
 package com.example.demo.controllers;
 
 import org.springframework.stereotype.Controller;
