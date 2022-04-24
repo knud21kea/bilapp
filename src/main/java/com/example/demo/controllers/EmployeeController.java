@@ -49,4 +49,11 @@ public class EmployeeController {
         model.addAttribute("job", job.toUpperCase());
         return "added-employee";
     }
+
+    @GetMapping("/bydept")
+    public String byDepartment(@RequestParam String name, Model model){
+        model.addAttribute("deptName", name);
+        model.addAttribute("employees", employeeIRepository.getAllWithConstraint(name));
+        return "bydept";
+    }
 }

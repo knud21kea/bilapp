@@ -93,4 +93,34 @@ public class EmployeeRepository implements IRepository<Employee> {
         }
         return true;
     }
+
+    @Override
+    public List<Employee> getAllWithConstraint(String name) {
+        Connection conn = DatabaseConnectionManager.getConnection();
+        List<Employee> employeesByDept = new ArrayList<Employee>();
+        try {
+            PreparedStatement pstmt = conn.prepareStatement
+                    ("SELECT * FROM employees, departments WHERE employees.department_number=departments.department_number AND departments.department_name='" + name + "'");
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                Employee temp = new Employee(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getDate(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getInt(8)
+                );
+                employeesByDept.add(temp);
+            }
+
+        }catch(SQLException e){
+            System.out.println("Something wrong in statement");
+            e.printStackTrace();
+        }
+        return employeesByDept;
+    }
+
 }

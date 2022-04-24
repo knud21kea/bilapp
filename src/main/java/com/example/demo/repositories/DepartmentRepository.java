@@ -1,6 +1,7 @@
 package com.example.demo.repositories;
 
 import com.example.demo.models.Department;
+import com.example.demo.models.Employee;
 import com.example.demo.utility.DatabaseConnectionManager;
 import com.mysql.cj.protocol.Resultset;
 
@@ -42,5 +43,10 @@ public class DepartmentRepository implements IRepository<Department>{
     @Override
     public boolean create(Department entity) {
         return false;
+    }
+
+    @Override
+    public List<Department> getAllWithConstraint(String name) {
+        return null;
     }
 }

@@ -9,6 +9,9 @@ public interface IRepository<T> {
     //ReadSingle
     public T getSingleById(int id);
 
+    //ReadSome
+    public List<T> getAllWithConstraint(String name);
+
     //Create
     public boolean create(T entity);
 

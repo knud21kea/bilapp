@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Added</title>
-    <link rel="stylesheet" th:href="@{style.css}"  type="text/css">
+    <link rel="stylesheet" th:href="@{style.css}" type="text/css">
 </head>
 <body>
+<button onclick="window.location.href='/index'">Back to index</button>
+<br>
 <h1>Employee was added successfully</h1>
-<br><br>
+<br>
 <table>
     <th>Name</th>
     <th>Job</th>
@@ -16,7 +18,5 @@
         <td th:text="${job}"></td>
     </tr>
 </table>
-<br><br>
-<button onclick="window.location.href='/index'">Back to index</button>
 </body>
 </html>
