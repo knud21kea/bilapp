@@ -23,7 +23,6 @@ public class EmployeeController {
     public String singleEmployee(@RequestParam int id, Model model)
     {
         model.addAttribute("employee",employeeIRepository.getSingleById(id));
-        model.addAttribute("employees", employeeIRepository.getAllEntities());
         return "employee";
     }
 
