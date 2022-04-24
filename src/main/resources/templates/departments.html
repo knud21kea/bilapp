@@ -11,9 +11,11 @@
 <h1>An overview of our departments</h1>
 <br>
 <table>
+    <tr>
     <th>Dept</th>
     <th>Name</th>
     <th>Location</th>
+    </tr>
     <tr th:each="department : ${departments}">
         <td th:text="${department.getDeptNo()}"></td>
         <td th:text="${department.getDeptName()}"></td>
