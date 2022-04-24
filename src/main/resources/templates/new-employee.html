@@ -17,22 +17,19 @@
 
     <label for="job">Choose job:&nbsp</label>
     <select name="job" id="job">
-        <option value="CLERK">Clerk</option>
-        <option value="SALESMAN">Salesman</option>
-        <option value="MANAGER">Manager</option>
-        <option value="ANALYST">Analyst</option>
+        <option value="CLERK">CLERK</option>
+        <option value="SALESMAN">SALESMAN</option>
+        <option value="MANAGER">MANAGER</option>
+        <option value="ANALYST">ANALYST</option>
+        <option value="OTHER">OTHER</option>
     </select>
     <br><br>
 
     <label for="manager">Choose manager:&nbsp</label>
-    <select name="manager" id="manager">
-        <option value="7566">Jones</option>
-        <option value="7698">Blake</option>
-        <option value="7782">Clark</option>
-        <option value="7788">Scott</option>
-        <option value="7839">King</option>
-        <option value="7902">Ford</option>
-    </select>
+        <select name="manager" id="manager">
+            <option th:each="id : ${employees}" th:value="${id.getEmpNo()}"
+                    th:text="${id.getEmpName()}"></option>
+        </select>
     <br><br>
 
     <label for="salary">Enter salary:&nbsp</label>
@@ -41,10 +38,8 @@
 
     <label for="dept">Choose department:&nbsp</label>
     <select name="dept" id="dept">
-        <option value="10">Accounting</option>
-        <option value="20">Research</option>
-        <option value="30">Sales</option>
-        <option value="40">Operations</option>
+        <option th:each="dept : ${departments}" th:value="${dept.getDeptNo()}"
+                th:text="${dept.getDeptName()}"></option>
     </select>
     <br><br>
 

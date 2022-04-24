@@ -15,7 +15,7 @@
     <th>Name</th>
     <th>Location</th>
     <tr th:each="department : ${departments}">
-        <td th:text="${department.getDeptno()}"></td>
+        <td th:text="${department.getDeptNo()}"></td>
         <td th:text="${department.getDeptName()}"></td>
         <td th:text="${department.getLocation()}"></td>
     </tr>
