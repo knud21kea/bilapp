@@ -23,6 +23,7 @@ public class EmployeeController {
     public String singleEmployee(@RequestParam int id, Model model)
     {
         model.addAttribute("employee",employeeIRepository.getSingleById(id));
+        model.addAttribute("employees", employeeIRepository.getAllEntities());
         return "employee";
     }
 
@@ -42,12 +43,5 @@ public class EmployeeController {
         model.addAttribute("name", name.toUpperCase());
         model.addAttribute("job", job.toUpperCase());
         return "added-employee";
-    }
-
-    @GetMapping("/bydept")
-    public String byDepartment(@RequestParam String name, Model model){
-        model.addAttribute("deptName", name);
-        model.addAttribute("employees", employeeIRepository.getAllWithConstraint(name));
-        return "bydept";
     }
 }

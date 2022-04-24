@@ -12,8 +12,11 @@
 <br>
 <form action="/employee">
     <label for="id">ID to find</label>
-    <input type="number" id="id" name="id" autofocus>
-    <input type="submit">
+    <select name="id" id="id">
+        <option th:each="id : ${employees}" th:value="${id.getEmpNo()}"
+                th:text="${id.getEmpNo()}"></option>
+    </select>
+    <input type="submit" value="Submit">
 </form>
 <br><br>
 <table>

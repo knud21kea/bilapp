@@ -13,10 +13,8 @@
 <form action="/bydept">
     <label for="name">Choose department name:&nbsp</label>
     <select name="name" id="name">
-        <option value="ACCOUNTING">Accounting</option>
-        <option value="RESEARCH">Research</option>
-        <option value="SALES">Sales</option>
-        <option value="OPERATIONS">Operations</option>
+        <option th:each="dept : ${departments}" th:value="${dept.getDeptName()}"
+                th:text="${dept.getDeptName()}"></option>
     </select>
     <input type="submit" value="Submit">
 </form>
