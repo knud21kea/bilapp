@@ -32,7 +32,7 @@ public class DBHandler
         try
         {
             PreparedStatement preparedStatement = con.prepareStatement
-                    ("INSERT INTO `dbwish`.`wish` (`wishlist_id` , `wish_name` , `wish_description` , `wish_price`, `wish_url`, `reservation_status`,`wish_note`) VALUES (?,?,?,?,?,?,?);");
+                    ("INSERT INTO `wish` (`wishlist_id` , `wish_name` , `wish_description` , `wish_price`, `wish_url`, `reservation_status`,`wish_note`) VALUES (?,?,?,?,?,?,?);");
             preparedStatement.setInt(1, wishlistID);
             preparedStatement.setString(2, wishName);
             preparedStatement.setString(3, wishDescription);

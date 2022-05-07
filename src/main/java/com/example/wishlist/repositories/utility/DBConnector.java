@@ -15,8 +15,8 @@ public class DBConnector {
     // con added
     public Connection connectDB() {
         try {
-            String url = "jdbc:mysql://dbwish.mysql.database.azure.com:3306/dbwish";
-            con = DriverManager.getConnection(url, "Andromeda@dbwish", "TestMinHest4");
+            String url = "jdbc:mysql://localhost:3306/wishi";
+            con = DriverManager.getConnection(url, "root", "ekch22Lmysql");
         } catch (Exception ignored) {
         }
         return con;
