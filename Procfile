@@ -1,0 +1,1 @@
+web: java -jar target/knud21kea/bilapp.jar
